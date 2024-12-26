@@ -1,0 +1,11 @@
+[submodule "oqtane.framework"]
+	path = oqtane.framework
+	url = https://github.com/markdav-is/oqtane.framework.git
+	branch = release/v6.0.1
+	ignore = all
+
+[submodule "ink"]
+	path = ink
+	url = https://github.com/markdav-is/ink.git
+	branch = release/v1.2.0
+	ignore = all
