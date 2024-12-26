@@ -1,0 +1,26 @@
+@namespace Hexstor.Theme.Space
+@using Oqtane.Themes
+@using Oqtane.Themes.Controls
+@using Oqtane.UI
+@inherits ContainerBase
+
+<div class="@_classes">
+    @if (_title && ModuleState.Title != "-")
+    {
+    <div class="row px-4">
+        <div class="d-flex flex-nowrap">
+            <ModuleActions /><h2><ModuleTitle /></h2>
+        </div>
+        <hr class="app-rule" />
+    </div>
+    }
+    else
+    {
+    <ModuleActions />
+    }
+    <div class="row px-4">
+        <div class="container-fluid">
+            <ModuleInstance />
+        </div>
+    </div>
+</div>
