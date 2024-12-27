@@ -1,6 +1,6 @@
 # Hexstor
 Hexstor the hex-based combat and interactive fiction space game.
-Prostor is the Russian work for "space" or "expance"
+Prostor is the Russian word for "space" or "expance"
 
 # Getting Started
 - clone the repo
