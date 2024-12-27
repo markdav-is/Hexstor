@@ -7,4 +7,6 @@ Prostor is the Russian word for "space" or "expance"
 - init the submodules (see discussion)
 - build oqtane.framework/oqtane.sln
 - build Hexstor.sln
+- set Oqtane.Server as the startup project
+- run Oqtane.server (or IIS Express)
 - create a local dev DB or get the dev DB creds from @markdav-is
