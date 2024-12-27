@@ -1,0 +1,22 @@
+@namespace Hexstor.Module.HexGrid
+@inherits ModuleBase
+
+@* Required *@
+<MudThemeProvider IsDarkMode=true />
+<MudPopoverProvider />
+
+@* Needed for dialogs
+<MudDialogProvider />*@
+
+@* Needed for snackbars
+<MudSnackbarProvider />*@
+@if(!_loading){
+    <div class="container">
+        <div class="row mb-1 align-items-center">
+            <Label Class="col-sm-3" For="value" HelpText="Enter a value" ResourceKey="SettingName" ResourceType="@resourceType">Name: </Label>
+            <div class="col-sm-9">
+                <input id="value" type="text" class="form-control" @bind="@_settingsVM.Value" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,19 @@
+.hex-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5em;
+}
+
+.hex {
+    position: relative;
+    width: 100%;
+    padding-top: 86.602%; /* Approx 1.732 (sqrt(3)) times the width */
+    background-color: #6a1b9a;
+    clip-path: polygon( 50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25% );
+    margin-bottom: -29.403%; /* Negative padding divided by 2 */
+}
+
+.hex:nth-child(even) {
+    margin-top: 14.701%; /* Negative margin divided by 2 */
+}
+
