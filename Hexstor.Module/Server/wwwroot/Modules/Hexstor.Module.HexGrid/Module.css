@@ -4,12 +4,12 @@
     --hex-margin-top: calc(var(--hex-height) / 2);
     --hex-column: calc(var(--hex-height) * 0.866);
     --hex-row: var(--hex-column);
-    --hexgrid-rows: 6;  /* must be even to make the staggering work */
+    --hexgrid-columns: 6;  /* must be even to make the staggering work */
 }
 
 .hex-grid {
     display: grid;
-    grid-template-columns: repeat(6, var(--hex-column));
+    grid-template-columns: repeat(var(--hexgrid-columns), var(--hex-column));
     gap: 0.1em;
 }
 

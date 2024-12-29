@@ -12,13 +12,13 @@
 
 @if (IsLoaded)
 {
-    <div class="hex-grid">
+    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;">
         @for (int row = 0; row < _settingsVM.Rows; row++)
         {
             for (int col = 0; col < _settingsVM.Columns; col++)
             {
                 var dc = new DoubCoord(row, col);
-                <div class="hex row-@row"><span>@dc.ToString()</span></div>
+                <div class="hex row-@row" ><span>@dc.ToString()</span></div>
             }
         }
     </div>
