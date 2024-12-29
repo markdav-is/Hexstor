@@ -10,7 +10,7 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-
+using Hexstor.Module.Shared.Models;
 using Hexstor.Module.Template.Services;
 
 namespace Hexstor.Module.HexGrid;

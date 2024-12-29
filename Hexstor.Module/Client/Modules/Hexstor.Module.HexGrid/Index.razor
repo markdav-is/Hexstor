@@ -10,29 +10,16 @@
 @* Needed for snackbars 
 <MudSnackbarProvider />*@
 
-<div class="hex-grid">
-    <div class="hex row-1"><span>0,0</span></div>
-    <div class="hex row-1"><span>1,1</span></div>
-    <div class="hex row-1"><span>2,0</span></div>
-    <div class="hex row-1"><span>3,1</span></div>
-    <div class="hex row-2"><span>0,2</span></div>
-    <div class="hex row-2"><span>1,3</span></div>
-    <div class="hex row-2"><span>2,2</span></div>
-    <div class="hex row-2"><span>3,3</span></div>
-    <div class="hex row-3"><span>0,4</span></div>
-    <div class="hex row-3"><span>1,5</span></div>
-    <div class="hex row-3"><span>2,4</span></div>
-    <div class="hex row-3"><span>3,5</span></div>
-    <div class="hex row-4"><span>0,4</span></div>
-    <div class="hex row-4"><span>1,5</span></div>
-    <div class="hex row-4"><span>2,4</span></div>
-    <div class="hex row-4"><span>3,5</span></div>
-    <div class="hex row-5"><span>0,6</span></div>
-    <div class="hex row-5"><span>1,7</span></div>
-    <div class="hex row-5"><span>2,6</span></div>
-    <div class="hex row-5"><span>3,7</span></div>
-    <div class="hex row-6"><span>0,8</span></div>
-    <div class="hex row-6"><span>1,9</span></div>
-    <div class="hex row-6"><span>2,8</span></div>
-    <div class="hex row-6"><span>3,9</span></div>
-</div>
+@if (IsLoaded)
+{
+    <div class="hex-grid">
+        @for (int row = 0; row < _settingsVM.Rows; row++)
+        {
+            for (int col = 0; col < _settingsVM.Columns; col++)
+            {
+                var dc = new DoubCoord(row, col);
+                <div class="hex row-@row"><span>@dc.ToString()</span></div>
+            }
+        }
+    </div>
+}

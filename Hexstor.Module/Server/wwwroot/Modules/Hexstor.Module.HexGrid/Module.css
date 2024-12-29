@@ -4,23 +4,12 @@
     --hex-margin-top: calc(var(--hex-height) / 2);
     --hex-column: calc(var(--hex-height) * 0.866);
     --hex-row: var(--hex-column);
+    --hexgrid-rows: 6;  /* must be even to make the staggering work */
 }
 
 .hex-grid {
     display: grid;
-    grid-template-columns: repeat(4, var(--hex-column));
-    gap: 0.1em;
-}
-
-.hex-grid-4 {
-    display: grid;
-    grid-template-columns: repeat(4, var(--hex-column));
-    gap: 0.1em;
-}
-
-.hex-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, var(--hex-column));
+    grid-template-columns: repeat(6, var(--hex-column));
     gap: 0.1em;
 }
 
@@ -39,22 +28,27 @@
         margin-top: var(--hex-margin-top);
     }
 
-.row-2 {
+
+.row-1 {
     transform: translateY(-50%);
 }
 
-.row-3 {
+.row-2 {
     transform: translateY(-100%);
 }
 
-.row-4 {
+.row-3 {
     transform: translateY(-150%);
 }
 
-.row-5 {
+.row-4 {
     transform: translateY(-200%);
 }
 
-.row-6 {
+.row-5 {
     transform: translateY(-250%);
+}
+
+.row-6 {
+    transform: translateY(-300%);
 }
