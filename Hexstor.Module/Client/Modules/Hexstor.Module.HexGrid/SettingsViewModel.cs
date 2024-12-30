@@ -12,15 +12,29 @@ namespace Hexstor.Module.HexGrid
     {
         public SettingsViewModel(ISettingService settingService, Dictionary<string, string> moduleSettings)
         {
-            Value = settingService.GetSetting(moduleSettings, nameof(Value), Value);
+            //convert setting string to int
+            if (int.TryParse(settingService.GetSetting(moduleSettings, nameof(Rows), Rows.ToString()), out int rows))
+            {
+                Rows = rows;
+            }
+            // cols
+            if (int.TryParse(settingService.GetSetting(moduleSettings, nameof(Columns), Columns.ToString()), out int cols))
+            {
+                Columns = cols;
+            }
         }
 
-        public string Value { get; set; } = string.Empty;
-   
+        public int Rows { get; set; } = 6;
+        public int Columns { get; set; } = 6;
+
+
         public void SetSettings(ISettingService settingService, Dictionary<string, string> moduleSettings) {
 
-            settingService.SetSetting(moduleSettings, nameof(Value), Value);
-       
+
+            settingService.SetSetting(moduleSettings, nameof(Rows), Rows.ToString());
+            settingService.SetSetting(moduleSettings, nameof(Columns), Columns.ToString());
+
+
         }
     }
 }
