@@ -1,0 +1,70 @@
+@namespace Hexstor.Module.Lottie
+@using System.ComponentModel
+@inherits ModuleBase
+@inject ISettingService SettingService
+@implements IDisposable
+
+@if (PageState.EditMode)
+{
+    <h2>@ModuleState.Title</h2>
+}
+else if (_lottie == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p>
+                        <dotlottie-wc src="@_lottie" autoplay loop></dotlottie-wc>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Hack: OK for demo but should be registered the Oqtane way *@
+    <script>
+        window.updateLottie = function(url) {
+            document.querySelector('dotlottie-wc').dotLottie.load({
+                loop: true,
+                autoplay: true,
+                src: url
+            });
+        }
+    </script>
+}
+@code {
+    private string _lottie;
+ 
+    protected override async Task OnInitializedAsync()
+    {
+        // Load the Ink story from settings
+        var settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+        _lottie = SettingService.GetSetting(settings, "Lottie", "Lottie goes here");
+
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged += HandlePropertyChanged;
+
+    }
+
+    private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+        if (args.PropertyName == "Lottie")
+        {
+            string url = SiteState.Properties["Lottie"];
+
+            // call the JS function to update the Lottie animation
+            JSRuntime.InvokeVoidAsync("updateLottie", url).GetAwaiter();
+
+        }
+    }
+
+    public void Dispose()
+    {
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged -= HandlePropertyChanged;
+    }
+  
+}
