@@ -1,0 +1,46 @@
+// Start of the story
+-> start
+
+== start ==
+You find yourself at a crossroads in a dense forest. The path splits into two directions.
+
+* [Take the left path] 
+    -> left_path
+* [Take the right path]
+    -> right_path
+
+== left_path ==
+You walk down the left path and encounter a serene lake. The water is crystal clear, and you can see fish swimming peacefully. # lottie:lottie.host/ed47bc6a-f351-4c4f-a657-00dc215f92c4/2lVUfCg7Kk.json
+
+* [Sit by the lake and relax]
+    -> relax_by_lake
+* [Continue walking along the path]
+    -> continue_left
+
+== right_path ==
+You take the right path and find an old, abandoned cabin. The door is slightly ajar, and you can hear faint noises from inside. # lottie:lottie.host/f71a1580-d203-4a60-bc85-ef29624bc400/umP8qHHKbi.lottie
+
+* [Enter the cabin]
+    -> enter_cabin
+* [Walk past the cabin]
+    -> walk_past_cabin
+
+== relax_by_lake ==
+You sit by the lake, enjoying the tranquility. The sound of the water and the gentle breeze make you feel at peace. # lottie:lottie.host/c51f2222-09f5-4b95-bf05-58d82a834a4d/4gCjRVGJER.lottie
+
+-> END
+
+== continue_left ==
+You continue walking along the path and discover a hidden waterfall. The sight is breathtaking, and you feel a sense of adventure. # lottie:lottie.host/12092157-74fd-45fd-8a90-d1634e089a9b/9NzW8N4UEq.lottie
+
+-> END
+
+== enter_cabin ==
+You cautiously enter the cabin and find it filled with old, dusty books and mysterious artifacts. Who knows what secrets it holds? # lottie:lottie.host/9e5fd4ad-2315-40e0-8f1b-d7718e596e88/jCzBfzdapq.lottie
+
+-> END
+
+== walk_past_cabin ==
+You decide to walk past the cabin and soon find yourself at the edge of the forest, with a beautiful view of the mountains in the distance. #lottie:lottie.host/a024b11e-56db-44ce-878f-86cdffdb793d/XEZyZJFuhu.lottie
+
+-> END

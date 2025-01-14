@@ -6,4 +6,9 @@ XCOPY "..\Shared\bin\Debug\net9.0\Hexstor.Module.Shared.Oqtane.dll" "..\..\oqtan
 XCOPY "..\Shared\bin\Debug\net9.0\Hexstor.Module.Shared.Oqtane.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
 XCOPY "..\Server\wwwroot\*" "..\..\oqtane.framework\Oqtane.Server\wwwroot\" /Y /S /I
 XCOPY "..\Client\bin\Debug\net9.0\MudBlazor.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
+XCOPY "..\Client\bin\Debug\net9.0\ink_compiler.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
+XCOPY "..\Client\bin\Debug\net9.0\ink_compiler.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
+XCOPY "..\Client\bin\Debug\net9.0\ink-engine-runtime.dll" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
+XCOPY "..\Client\bin\Debug\net9.0\ink-engine-runtime.pdb" "..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\" /Y
+
 

@@ -1,0 +1,98 @@
+@using InkRuntime = global::Ink.Runtime;
+@using global::Ink
+
+@namespace Hexstor.Module.Ink
+@inherits ModuleBase
+
+@inject ISettingService SettingService
+
+
+@if (PageState.EditMode)
+{
+    <h2>@ModuleState.Title</h2>
+}
+else if (_prompt == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <p>
+                        <h5>@_prompt</h5>
+                    </p>
+                    <p>
+                        @foreach (var choice in _story.currentChoices)
+                        {
+                            <button class="btn btn-primary" @onclick="(() => ChoiceClick(choice.index))">@choice.text</button>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string _prompt;
+    protected InkRuntime.Story _story = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load the Ink story from settings
+        var settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+        var ink = SettingService.GetSetting(settings, "Ink", "Ink goes here");
+
+        if (!string.IsNullOrEmpty(ink))
+        {
+            // Compile the Ink story
+
+            var compiler = new Compiler(ink);
+            try
+            {
+                _story = compiler.Compile(); // this can fail if the ink is invalid
+                Continue();
+            }
+            catch (Exception ex)
+            {
+                AddModuleMessage(ex.Message, MessageType.Error);
+            }
+
+        }
+    }
+
+    private void Continue()
+    {
+        if (_story != null && _story.canContinue)
+        {
+            _prompt = _story.ContinueMaximally();
+        }
+    }
+
+    private async Task ChoiceClick(int index)
+    {
+        var choice = _story.currentChoices[index];
+        _story.ChooseChoiceIndex(choice.index);
+        Continue();
+        StateHasChanged();
+        await ChangeLottie();
+     
+    }
+
+    private async Task ChangeLottie()
+    {
+        // look for a lottie tag on the current story section
+        var lottieTag = _story.currentTags.FirstOrDefault(t => t.Contains("lottie:", StringComparison.InvariantCultureIgnoreCase));
+        if (lottieTag != null)
+        {
+            // update the sitestate with the new lottie url
+            var url = $"https://{lottieTag.Substring(7)}"; // remove the lottie: prefix and add https://
+            SiteState.Properties.Lottie = url;  // this will be used by the Lottie module
+        }
+
+    }
+  
+}
