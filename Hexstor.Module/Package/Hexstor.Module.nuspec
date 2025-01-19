@@ -20,15 +20,17 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Client\bin\Release\net8.0\Hexstor.Module.Template.Client.Oqtane.dll" target="lib\net8.0" /> 
-    <file src="..\Client\bin\Release\net8.0\Hexstor.Module.Template.Client.Oqtane.pdb" target="lib\net8.0" /> 
-    <file src="..\Server\bin\Release\net8.0\Hexstor.Module.Template.Server.Oqtane.dll" target="lib\net8.0" /> 
-    <file src="..\Server\bin\Release\net8.0\Hexstor.Module.Template.Server.Oqtane.pdb" target="lib\net8.0" /> 
-    <file src="..\Shared\bin\Release\net8.0\Hexstor.Module.Template.Shared.Oqtane.dll" target="lib\net8.0" /> 
-    <file src="..\Shared\bin\Release\net8.0\Hexstor.Module.Template.Shared.Oqtane.pdb" target="lib\net8.0" /> 
+    <file src="..\Client\bin\Release\net9.0\Hexstor.Module.Client.Oqtane.dll" target="lib\net9.0" /> 
+    <file src="..\Client\bin\Release\net9.0\Hexstor.Module.Client.Oqtane.pdb" target="lib\net9.0" /> 
+    <file src="..\Server\bin\Release\net9.0\Hexstor.Module.Server.Oqtane.dll" target="lib\net9.0" /> 
+    <file src="..\Server\bin\Release\net9.0\Hexstor.Module.Server.Oqtane.pdb" target="lib\net9.0" /> 
+    <file src="..\Shared\bin\Release\net9.0\Hexstor.Module.Shared.Oqtane.dll" target="lib\net9.0" /> 
+    <file src="..\Shared\bin\Release\net9.0\Hexstor.Module.Shared.Oqtane.pdb" target="lib\net9.0" /> 
     <file src="..\Server\wwwroot\**\*.*" target="wwwroot" /> 
     <file src="icon.png" target="" />
     <!--MudBlazor-->
-    <file src="..\Server\bin\Release\net8.0\MudBlazor.dll" target="lib\net8.0" />
+    <file src="..\Server\bin\Release\net9.0\MudBlazor.dll" target="lib\net9.0" />
+	<file src="..\Client\bin\Release\net9.0\ink_compiler.dll" target="lib\net9.0" />
+	<file src="..\Client\bin\Release\net9.0\ink-engine-runtime.dll" target="lib\net9.0" />
   </files>
 </package>
