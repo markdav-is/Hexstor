@@ -20,7 +20,12 @@
                 var hex = new Hex {
                     DoubCoord = new DoubCoord(row, col)
                 };
-
+                if (row == 0 && col == 0) {
+                    hex.Ship = new Ship
+                            {
+                                Heading = 3
+                            };
+                }
                 <HexTile Hex="@hex"/>
             }
         }
