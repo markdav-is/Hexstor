@@ -19,10 +19,16 @@ public partial class ShipCounter: ModuleControlBase
 {
 
     [Parameter] 
-    public int Heading { get; set; }
+    public Ship Ship { get; set; }
         
     private string GetHeadingClass() { 
-        return $"heading{Heading}"; 
+        return $"heading{Ship.Heading}"; 
     }
+
+    private string GetStyleLevelClass()
+    {
+        return $"Style{Ship.StyleCode}Level{Ship.Level}";
+    }
+
 }
 

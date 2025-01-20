@@ -1,0 +1,40 @@
+@namespace Hexstor.Module.HexGrid
+@inherits ModuleBase
+@* Required *@
+<MudThemeProvider IsDarkMode=true />
+<MudPopoverProvider />
+
+@* Needed for dialogs 
+<MudDialogProvider />*@
+
+@* Needed for snackbars 
+<MudSnackbarProvider />*@
+
+@if (IsLoaded)
+{
+    <div class="hex-grid" style="--hexgrid-columns: @_maxCols ;">
+        @for (int row = 0; row < _maxRows; row++)
+        {
+            _level++;
+            // reset _level every 5th row and change style
+            if (_level > 5)
+            {
+                _level = 1;
+                _style ++;
+            }
+
+            for (int col = 0; col < _maxCols; col++)
+            {
+                var hex = new Hex {
+                    DoubCoord = new DoubCoord(row, col),
+                    Ship = new Ship { 
+                                Heading = col+1,
+                                Level = _level,
+                                Style = _style,
+                    }
+                };
+                <HexTile Hex="@hex"/>
+            }
+        }
+    </div>
+}

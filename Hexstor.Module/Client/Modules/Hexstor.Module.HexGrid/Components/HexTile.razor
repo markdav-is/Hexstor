@@ -3,7 +3,7 @@
 
 <div class="hex row-@Hex.DoubCoord.Row">
     @if(Hex.Ship!=null){
-        <ShipCounter Heading="@Hex.Ship.Heading" />
+        <ShipCounter Ship="@Hex.Ship" />
     }
     else{
         <span>@Hex.DoubCoord.ToString()</span>

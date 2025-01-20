@@ -12,6 +12,7 @@
 
 @if (IsLoaded)
 {
+    <ActionLink Action="Spritesheet" Text="Show Spritesheet" />
     <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;">
         @for (int row = 0; row < _settingsVM.Rows; row++)
         {
@@ -20,12 +21,6 @@
                 var hex = new Hex {
                     DoubCoord = new DoubCoord(row, col)
                 };
-                if (row == 0 && col == 0) {
-                    hex.Ship = new Ship
-                            {
-                                Heading = 3
-                            };
-                }
                 <HexTile Hex="@hex"/>
             }
         }
