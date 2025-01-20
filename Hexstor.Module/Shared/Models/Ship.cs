@@ -10,16 +10,15 @@ namespace Hexstor.Module.Shared.Models
     /// Represents a double-coordinate hex system.
     /// https://www.redblobgames.com/grids/hexagons/#coordinates-doubled
     /// </summary>
-    public class Hex
+    public class Ship
     {
         // constrctor takes a row and column and calculates the x and y coordinates
-        public Hex()
+        public Ship()
         {
         }
 
-        public DoubCoord DoubCoord { get; set; }
-        public Ship Ship { get; set; }
+        public int Heading { get; set; } = 1;
 
-
+   
     }
 }

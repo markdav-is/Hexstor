@@ -22,7 +22,7 @@
     line-height: var(--hex-height);
     text-align: center;
     clip-path: polygon( 25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50% );
-    display: inline-block;
+    display: block;
 }
     .hex:nth-child(even) {
         margin-top: var(--hex-margin-top);
@@ -52,3 +52,35 @@
 .row-6 {
     transform: translateY(-300%);
 }
+
+.ship {
+    width: var(--hex-width);
+    height: var(--hex-height);
+    background-image: url('/images/shipsprite.png');
+    background-size: 600% 100%;
+}
+
+    .ship.heading1 {
+        background-position: 0 0;
+    }
+
+    .ship.heading2 {
+        background-position: 20% 0;
+    }
+
+    .ship.heading3 {
+        background-position: 40% 0;
+    }
+
+    .ship.heading4 {
+        background-position: 60% 0;
+    }
+
+    .ship.heading5 {
+        background-position: 80% 0;
+    }
+
+    .ship.heading6 {
+        background-position: 100% 0;
+    }
+
