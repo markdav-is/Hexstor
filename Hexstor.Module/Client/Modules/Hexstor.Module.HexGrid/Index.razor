@@ -12,10 +12,24 @@
 
 @if (IsLoaded)
 {
+<<<<<<< HEAD
     <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;pointer-events: none;">
         @foreach (var hex in _gridCells.Values)
         {
             <HexTile @key='hex.DoubCoord' Hex="hex" OnClicked="HexSelected" />
+=======
+    <ActionLink Action="Spritesheet" Text="Show Spritesheet" />
+    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;">
+        @for (int row = 0; row < _settingsVM.Rows; row++)
+        {
+            for (int col = 0; col < _settingsVM.Columns; col++)
+            {
+                var hex = new Hex {
+                    DoubCoord = new DoubCoord(row, col)
+                };
+                <HexTile Hex="@hex"/>
+            }
+>>>>>>> b64b4036e73244673594bbfe4d8ede3d910d3333
         }
     </div>
 }

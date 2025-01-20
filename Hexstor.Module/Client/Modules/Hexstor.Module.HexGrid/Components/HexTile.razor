@@ -1,10 +1,16 @@
 ﻿@namespace Hexstor.Module.HexGrid
 @inherits ModuleControlBase
 
+<<<<<<< HEAD
 <a @onclick='Clicked' class="hex row-@Hex.DoubCoord.Row @(Hex.Selected ? "active" : "")">
     @if (Hex.Ship != null)
     {
         <ShipCounter Heading="@Hex.Ship.Heading" />
+=======
+<div class="hex row-@Hex.DoubCoord.Row">
+    @if(Hex.Ship!=null){
+        <ShipCounter Ship="@Hex.Ship" />
+>>>>>>> b64b4036e73244673594bbfe4d8ede3d910d3333
     }
     else
     {
