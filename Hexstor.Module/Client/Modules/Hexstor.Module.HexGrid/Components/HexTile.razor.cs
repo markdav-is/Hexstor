@@ -25,13 +25,11 @@ public partial class HexTile : ModuleControlBase
     [Parameter]
     public Hex Hex { get; set; }
 
-    [Parameter]
-    public EventCallback<Hex> OnClicked { get; set; }
-
-    private async Task Clicked(MouseEventArgs _)
+    private async Task Clicked(MouseEventArgs e)
     {
+        Hex.Selected = !Hex.Selected;
+
         await logger.LogInformation("Clicked Coords {DoubCoord}", Hex.DoubCoord.ToString());
-        await OnClicked.InvokeAsync(Hex);
     }
 
 }
