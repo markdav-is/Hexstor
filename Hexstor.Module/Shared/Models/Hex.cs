@@ -19,7 +19,7 @@ namespace Hexstor.Module.Shared.Models
 
         public DoubCoord DoubCoord { get; set; }
         public Ship Ship { get; set; }
-
+        public bool Selected { get; set; }
 
     }
 }

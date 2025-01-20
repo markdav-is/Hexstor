@@ -12,22 +12,10 @@
 
 @if (IsLoaded)
 {
-    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;">
-        @for (int row = 0; row < _settingsVM.Rows; row++)
+    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;pointer-events: none;">
+        @foreach (var hex in _gridCells.Values)
         {
-            for (int col = 0; col < _settingsVM.Columns; col++)
-            {
-                var hex = new Hex {
-                    DoubCoord = new DoubCoord(row, col)
-                };
-                if (row == 0 && col == 0) {
-                    hex.Ship = new Ship
-                            {
-                                Heading = 3
-                            };
-                }
-                <HexTile Hex="@hex"/>
-            }
+            <HexTile @key='hex.DoubCoord' Hex="hex" OnClicked="HexSelected" />
         }
     </div>
 }
