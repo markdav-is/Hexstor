@@ -53,12 +53,97 @@
     transform: translateY(-300%);
 }
 
+.row-7 {
+    transform: translateY(-350%);
+}
+.row-8 {
+    transform: translateY(-400%);
+}
+.row-9 {
+    transform: translateY(-450%);
+}
+.row-10 {
+    transform: translateY(-500%);
+}
+.row-11 {
+    transform: translateY(-550%);
+}
+.row-12 {
+    transform: translateY(-600%);
+}
+.row-13 {
+    transform: translateY(-650%);
+}
+.row-14 {
+    transform: translateY(-700%);
+}
+.row-15 {
+    transform: translateY(-750%);
+}
+
+
 .ship {
     width: var(--hex-width);
     height: var(--hex-height);
-    background-image: url('/images/shipsprite.png');
+ /*   background-image: url('/images/shipsprite.png');*/
     background-size: 600% 100%;
 }
+
+    .ship.StyleBLevel1 {
+        background-image: url('/images/ShipB1.png');
+    }
+    .ship.StyleBLevel2 {
+        background-image: url('/images/ShipB2.png');
+    }
+    .ship.StyleBLevel3 {
+        background-image: url('/images/ShipB3.png');
+    }
+    .ship.StyleBLevel4 {
+        background-image: url('/images/ShipB4.png');
+    }
+    .ship.StyleBLevel5 {
+        background-image: url('/images/ShipB5.png');
+    }
+
+    .ship.StyleRLevel1 {
+        background-image: url('/images/ShipR1.png');
+    }
+
+    .ship.StyleRLevel2 {
+        background-image: url('/images/ShipR2.png');
+    }
+
+    .ship.StyleRLevel3 {
+        background-image: url('/images/ShipR3.png');
+    }
+
+    .ship.StyleRLevel4 {
+        background-image: url('/images/ShipR4.png');
+    }
+
+    .ship.StyleRLevel5 {
+        background-image: url('/images/ShipR5.png');
+    }
+
+    .ship.StyleYLevel1 {
+        background-image: url('/images/ShipY1.png');
+    }
+
+    .ship.StyleYLevel2 {
+        background-image: url('/images/ShipY2.png');
+    }
+
+    .ship.StyleYLevel3 {
+        background-image: url('/images/ShipY3.png');
+    }
+
+    .ship.StyleYLevel4 {
+        background-image: url('/images/ShipY4.png');
+    }
+
+    .ship.StyleYLevel5 {
+        background-image: url('/images/ShipY5.png');
+    }
 
     .ship.heading1 {
         background-position: 0 0;
