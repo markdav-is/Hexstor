@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Hexstor.Template</id>
-    <version>1.0.0</version>
+    <id>Hexstor</id>
+    <version>1.0.1</version>
     <authors>Hexstor</authors>
     <owners>Hexstor</owners>
     <title>Template</title>
