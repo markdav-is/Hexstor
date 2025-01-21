@@ -8,27 +8,27 @@ using Oqtane.Services;
 using Oqtane.Models;
 using Oqtane.Shared;
 
-
 namespace Hexstor.Module.HexGrid
-{ 
-    public partial class Settings: ModuleBase
+{
+    public partial class Settings : ModuleBase
     {
         [Inject] public ISettingService SettingService { get; set; }
-        [Inject] public IStringLocalizer<Settings> Localizer{ get; set; }
-		
-		private string resourceType = "Hexstor.Module.Template.Settings, Hexstor.Module.Template.Client.Oqtane"; // for localization
+        [Inject] public IStringLocalizer<Settings> Localizer { get; set; }
+
+        private string resourceType = "Hexstor.Module.Template.Settings, Hexstor.Module.Template.Client.Oqtane"; // for localization
         public override string Title => "Template Settings";
         private SettingsViewModel _settingsVM;
         private bool _loading = true;
-        private string _value;
+
         public override List<Resource> Resources => new List<Resource>()
-            {
-                new Resource { ResourceType = ResourceType.Stylesheet,  Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
-                new Resource { ResourceType = ResourceType.Stylesheet,  Url = "_content/MudBlazor/MudBlazor.min.css" },
-                new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
-                new Resource { ResourceType = ResourceType.Script,     Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
-                new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
-            };
+        {
+            new Resource { ResourceType = ResourceType.Stylesheet, Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
+            new Resource { ResourceType = ResourceType.Stylesheet, Url = "_content/MudBlazor/MudBlazor.min.css" },
+            new Resource { ResourceType = ResourceType.Stylesheet, Url = ModulePath() + "Module.css" },
+            new Resource { ResourceType = ResourceType.Script, Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
+            new Resource { ResourceType = ResourceType.Script, Url = ModulePath() + "Module.js" },
+        };
+
         protected override async Task OnInitializedAsync()
         {
             try
@@ -54,6 +54,18 @@ namespace Hexstor.Module.HexGrid
             catch (Exception ex)
             {
                 AddModuleMessage(ex.Message, MessageType.Error);
+            }
+        }
+
+        public bool ShowSpritesheetButton
+        {
+            get => _settingsVM?.ShowSpritesheetButton ?? true; // Default to true if _settingsVM is null
+            set
+            {
+                if (_settingsVM != null)
+                {
+                    _settingsVM.ShowSpritesheetButton = value;
+                }
             }
         }
     }

@@ -12,16 +12,21 @@
 
 @if (IsLoaded)
 {
-    <ActionLink Action="Spritesheet" Text="Show Spritesheet" />
-    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns ;">
+    @* Conditionally render the spritesheet button based on the setting *@
+    @if (_settingsVM.ShowSpritesheetButton)
+    {
+        <ActionLink Action="Spritesheet" Text="Show Spritesheet" />
+    }
+    <div class="hex-grid" style="--hexgrid-columns: @_settingsVM.Columns;">
         @for (int row = 0; row < _settingsVM.Rows; row++)
         {
             for (int col = 0; col < _settingsVM.Columns; col++)
             {
-                var hex = new Hex {
-                    DoubCoord = new DoubCoord(row, col)
-                };
-                <HexTile Hex="@hex"/>
+                var hex = new Hex
+                        {
+                            DoubCoord = new DoubCoord(row, col)
+                        };
+                <HexTile Hex="@hex" />
             }
         }
     </div>
