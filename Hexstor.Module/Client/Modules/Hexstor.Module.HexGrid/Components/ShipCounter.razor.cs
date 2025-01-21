@@ -10,9 +10,9 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-using Hexstor.Module.Shared.Models;
 using Hexstor.Module.Template.Services;
 using System.ComponentModel;
+using Hexstor.Module.Client.ViewModels;
 
 namespace Hexstor.Module.HexGrid;
 
@@ -40,6 +40,7 @@ public partial class ShipCounter: ModuleControlBase
 
     private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
     {
+        if (Ship == null) return;  // no ship, no action
 
         if (args.PropertyName == "Command")
         {

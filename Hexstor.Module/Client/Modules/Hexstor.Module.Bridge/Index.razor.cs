@@ -56,19 +56,16 @@ public partial class Index : ModuleBase
     private async Task Left()
     {
         SiteState.Properties.Command = "Left";
-
     }
 
     private async Task Right()
     {
         SiteState.Properties.Command = "Right";
-
     }
 
     private async Task Forward()
     {
         SiteState.Properties.Command = "Forward";
-
     }
 
     private async Task Fire()

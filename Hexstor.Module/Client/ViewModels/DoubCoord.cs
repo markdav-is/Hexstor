@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hexstor.Module.Shared.Models
+namespace Hexstor.Module.Client.ViewModels
 {
     /// <summary>
     /// Represents a double-coordinate hex system.
@@ -32,8 +32,32 @@ namespace Hexstor.Module.Shared.Models
         public DoubCoord Forward(int direction)
         {
             DoubCoord newCoord = null;
-            if (Row % 2 != 0)
+            if (Col % 2 != 0)
             {  //odd
+                switch (direction)
+                {
+                    case 1:
+                        newCoord = new DoubCoord(Row - 1, Col);
+                        break;
+                    case 2:
+                        newCoord = new DoubCoord(Row - 1, Col + 1);
+                        break;
+                    case 3:
+                        newCoord = new DoubCoord(Row + 1, Col + 1);
+                        break;
+                    case 4:
+                        newCoord = new DoubCoord(Row + 1, Col);
+                        break;
+                    case 5:
+                        newCoord = new DoubCoord(Row, Col - 1);
+                        break;
+                    case 6:
+                        newCoord = new DoubCoord(Row, Col - 1);
+                        break;
+                }
+            }
+            else
+            { // even
                 switch (direction)
                 {
                     case 1:
@@ -46,37 +70,13 @@ namespace Hexstor.Module.Shared.Models
                         newCoord = new DoubCoord(Row, Col + 1);
                         break;
                     case 4:
-                        newCoord = new DoubCoord(Row + 1, Col);
-                        break;
-                    case 5:
-                        newCoord = new DoubCoord(Row, Col - 1);
-                        break;
-                    case 6:
-                        newCoord = new DoubCoord(Row - 1, Col - 1);
-                        break;
-                }
-            }
-            else
-            { // even
-                switch (direction)
-                {
-                    case 1:
-                        newCoord = new DoubCoord(Row - 1, Col);
-                        break;
-                    case 2:
-                        newCoord = new DoubCoord(Row-1, Col + 1);
-                        break;
-                    case 3:
-                        newCoord = new DoubCoord(Row, Col + 1);
-                        break;
-                    case 4:
                         newCoord = new DoubCoord(Row+1, Col);
                         break;
                     case 5:
                         newCoord = new DoubCoord(Row+1, Col - 1);
                         break;
                     case 6:
-                        newCoord = new DoubCoord(Row, Col - 1);
+                        newCoord = new DoubCoord(Row-1, Col - 1);
                         break;
                 }
             }

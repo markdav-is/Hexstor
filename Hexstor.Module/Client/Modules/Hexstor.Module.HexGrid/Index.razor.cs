@@ -10,7 +10,7 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-using Hexstor.Module.Shared.Models;
+using Hexstor.Module.Client.ViewModels;
 using Hexstor.Module.Template.Services;
 using System.ComponentModel;
 using System.Linq;
@@ -105,6 +105,7 @@ public partial class Index : ModuleBase
         newHex.Ship = shipHex.Ship;
         // remove the ship from the current hex
         shipHex.Ship = null;
+        StateHasChanged();
     }
 
     private void ResetShip() {
