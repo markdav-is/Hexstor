@@ -10,8 +10,10 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-using Hexstor.Module.Shared.Models;
+using Hexstor.Module.Client.ViewModels;
 using Hexstor.Module.Template.Services;
+using System.ComponentModel;
+using System.Linq;
 
 namespace Hexstor.Module.HexGrid;
 
@@ -32,7 +34,8 @@ public partial class Index : ModuleBase
         new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
     };	
     private bool IsLoaded;
-    private SettingsViewModel _settingsVM; 
+    private SettingsViewModel _settingsVM;
+    private List<Hex> _hexes = new List<Hex>();
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,7 +43,15 @@ public partial class Index : ModuleBase
         {
             var moduleSettings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
             _settingsVM = new SettingsViewModel(SettingService, moduleSettings);
-           
+
+            // build array of hexes
+            for (int row = 0; row < _settingsVM.Rows; row++)
+            {
+                for (int col = 0; col < _settingsVM.Columns; col++)
+                {
+                    _hexes.Add(new Hex {DoubCoord = new DoubCoord(row, col)});
+                }
+            }
             IsLoaded = true;
         }
         catch (Exception ex)
@@ -48,6 +59,70 @@ public partial class Index : ModuleBase
             await logger.LogError(ex, "Error Loading Template {Error}", ex.Message);
             AddModuleMessage(Localizer["Message.LoadError"], MessageType.Error);
         }
+
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged += HandlePropertyChanged;
+
+    }
+
+    private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+        if (args.PropertyName == "Command")
+        {
+            if (SiteState.Properties.Command == "Forward")
+            {
+                MoveShipForward();
+            }
+            if (SiteState.Properties.Command == "Play")
+            {
+                ResetShip();
+            }
+
+        }
+    }
+
+    private void MoveShipForward()
+    {
+        // find hex with a ship
+        var shipHex = _hexes.FirstOrDefault(h => h.Ship != null);
+        if (shipHex == null)
+        {
+            return;  // no ship, no work to do
+        }
+        // find the ship
+        var ship = shipHex.Ship;
+
+        // find the next hex depending on the heading using the double cooordinate system
+        var forwardCoord = shipHex.DoubCoord.Forward(ship.Heading);
+        var newHex = _hexes.FirstOrDefault(
+            h => h.DoubCoord.Row == forwardCoord.Row
+            && h.DoubCoord.Col == forwardCoord.Col);
+
+        if (newHex == null)
+        {
+            return;  // can't fly off the map
+        }
+
+        newHex.Ship = shipHex.Ship;
+        // remove the ship from the current hex
+        shipHex.Ship = null;
+        StateHasChanged();
+    }
+
+    private void ResetShip() {
+        // remove all ships from the hexes
+        foreach (var hex in _hexes.Where(h => h.Ship != null))
+        {
+            hex.Ship = null;
+        }
+        // add a ship to the first hex
+        _hexes.First().Ship = new Ship { Heading = 3, Style = ShipStyle.Red, Level = 2 };
+        StateHasChanged();
+    }
+
+
+    public void Dispose()
+    {
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged -= HandlePropertyChanged;
     }
 
 

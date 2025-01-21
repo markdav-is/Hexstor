@@ -10,17 +10,15 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-using Hexstor.Module.Client.ViewModels;
+
 using Hexstor.Module.Template.Services;
 
-namespace Hexstor.Module.HexGrid;
+namespace Hexstor.Module.Bridge;
 
-public partial class Spritesheet : ModuleBase
+public partial class Index : ModuleBase
 {
-		
-    [Inject] public TemplateService TemplateService { get; set; }
+    	
     [Inject] public NavigationManager NavigationManager { get; set; }
-    [Inject] public IStringLocalizer<Index> Localizer { get; set; }
     [Inject] public ISettingService SettingService { get; set; }
 	
     public override List<Resource> Resources => new List<Resource>()
@@ -32,12 +30,7 @@ public partial class Spritesheet : ModuleBase
         new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
     };	
     private bool IsLoaded;
-    private SettingsViewModel _settingsVM;
-    private int _level = 0;
-    private ShipStyle _style = ShipStyle.Red;
-    public override string Actions => "Spritesheet";
-    private int _maxRows = 15;
-    private int _maxCols = 6;
+    private SettingsViewModel _settingsVM; 
 
     protected override async Task OnInitializedAsync()
     {
@@ -50,11 +43,39 @@ public partial class Spritesheet : ModuleBase
         }
         catch (Exception ex)
         {
-            await logger.LogError(ex, "Error Loading Template {Error}", ex.Message);
-            AddModuleMessage(Localizer["Message.LoadError"], MessageType.Error);
+            await logger.LogError(ex, "Error Loading Settings {Error}", ex.Message);
+            AddModuleMessage("Error loading Settings", MessageType.Error);
         }
     }
 
+    private async Task Play()
+    {
+        SiteState.Properties.Command = "Play";
+    }
 
+    private async Task Left()
+    {
+        SiteState.Properties.Command = "Left";
+    }
+
+    private async Task Right()
+    {
+        SiteState.Properties.Command = "Right";
+    }
+
+    private async Task Forward()
+    {
+        SiteState.Properties.Command = "Forward";
+    }
+
+    private async Task Fire()
+    {
+        SiteState.Properties.Command = "Fire";
+    }
+
+
+    static bool IsSuccessStatusCode(HttpStatusCode statusCode) { 
+        return (int)statusCode >= 200 && (int)statusCode <= 299; 
+    }
 }
 
