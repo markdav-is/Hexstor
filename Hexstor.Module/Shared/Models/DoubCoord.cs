@@ -29,6 +29,58 @@ namespace Hexstor.Module.Shared.Models
         {
             return $"{Xcord}, {Ycord}";
         }
-
+        public DoubCoord Forward(int direction)
+        {
+            DoubCoord newCoord = null;
+            if (Row % 2 != 0)
+            {  //odd
+                switch (direction)
+                {
+                    case 1:
+                        newCoord = new DoubCoord(Row - 1, Col);
+                        break;
+                    case 2:
+                        newCoord = new DoubCoord(Row - 1, Col + 1);
+                        break;
+                    case 3:
+                        newCoord = new DoubCoord(Row, Col + 1);
+                        break;
+                    case 4:
+                        newCoord = new DoubCoord(Row + 1, Col);
+                        break;
+                    case 5:
+                        newCoord = new DoubCoord(Row, Col - 1);
+                        break;
+                    case 6:
+                        newCoord = new DoubCoord(Row - 1, Col - 1);
+                        break;
+                }
+            }
+            else
+            { // even
+                switch (direction)
+                {
+                    case 1:
+                        newCoord = new DoubCoord(Row - 1, Col);
+                        break;
+                    case 2:
+                        newCoord = new DoubCoord(Row-1, Col + 1);
+                        break;
+                    case 3:
+                        newCoord = new DoubCoord(Row, Col + 1);
+                        break;
+                    case 4:
+                        newCoord = new DoubCoord(Row+1, Col);
+                        break;
+                    case 5:
+                        newCoord = new DoubCoord(Row+1, Col - 1);
+                        break;
+                    case 6:
+                        newCoord = new DoubCoord(Row, Col - 1);
+                        break;
+                }
+            }
+            return newCoord;
+        }
     }
 }
