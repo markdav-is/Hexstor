@@ -29,58 +29,37 @@ namespace Hexstor.Module.Client.ViewModels
         {
             return $"{Xcord}, {Ycord}";
         }
+
+        private string[] faces = { "A", "B", "C", "D", "E", "F" };
+        
+        public string GetFace(int direction) {
+            return faces[direction - 1];
+        }
+        
         public DoubCoord Forward(int direction)
         {
-            DoubCoord newCoord = null;
-            if (Col % 2 != 0)
-            {  //odd
-                switch (direction)
-                {
-                    case 1:
-                        newCoord = new DoubCoord(Row - 1, Col);
-                        break;
-                    case 2:
-                        newCoord = new DoubCoord(Row, Col + 1);
-                        break;
-                    case 3:
-                        newCoord = new DoubCoord(Row + 1, Col + 1);
-                        break;
-                    case 4:
-                        newCoord = new DoubCoord(Row + 1, Col);
-                        break;
-                    case 5:
-                        newCoord = new DoubCoord(Row+1, Col - 1);
-                        break;
-                    case 6:
-                        newCoord = new DoubCoord(Row, Col - 1);
-                        break;
-                }
-            }
-            else
-            { // even
-                switch (direction)
-                {
-                    case 1:
-                        newCoord = new DoubCoord(Row - 1, Col);
-                        break;
-                    case 2:
-                        newCoord = new DoubCoord(Row - 1, Col + 1);
-                        break;
-                    case 3:
-                        newCoord = new DoubCoord(Row, Col + 1);
-                        break;
-                    case 4:
-                        newCoord = new DoubCoord(Row+1, Col);
-                        break;
-                    case 5:
-                        newCoord = new DoubCoord(Row, Col - 1);
-                        break;
-                    case 6:
-                        newCoord = new DoubCoord(Row-1, Col - 1);
-                        break;
-                }
-            }
-            return newCoord;
+            int[][] oddDirections =
+            {
+                [-1, 0 ], // direction 1 N
+                [ 0, 1 ], // direction 2 NE
+                [ 1, 1 ], // direction 3 SE
+                [ 1, 0 ], // direction 4 S
+                [ 1, -1], // direction 5 SW
+                [ 0, -1]  // direction 6 NW
+            };
+
+            int[][] evenDirections = 
+            {
+                [ -1,  0 ], // direction 1 N
+                [ -1,  1 ], // direction 2 NE
+                [  0,  1 ], // direction 3 SE
+                [  1,  0 ], // direction 4 S
+                [  0, -1 ], // direction 5 SW
+                [ -1, -1 ]  // direction 6 NW
+            };
+
+            int[] selectedDirection = Col % 2 != 0 ? oddDirections[direction - 1] : evenDirections[direction - 1];
+            return new DoubCoord(Row + selectedDirection[0], Col + selectedDirection[1]);
         }
     }
 }
