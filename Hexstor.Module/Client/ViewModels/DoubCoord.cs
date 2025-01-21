@@ -40,7 +40,7 @@ namespace Hexstor.Module.Client.ViewModels
                         newCoord = new DoubCoord(Row - 1, Col);
                         break;
                     case 2:
-                        newCoord = new DoubCoord(Row - 1, Col + 1);
+                        newCoord = new DoubCoord(Row, Col + 1);
                         break;
                     case 3:
                         newCoord = new DoubCoord(Row + 1, Col + 1);
@@ -49,7 +49,7 @@ namespace Hexstor.Module.Client.ViewModels
                         newCoord = new DoubCoord(Row + 1, Col);
                         break;
                     case 5:
-                        newCoord = new DoubCoord(Row, Col - 1);
+                        newCoord = new DoubCoord(Row+1, Col - 1);
                         break;
                     case 6:
                         newCoord = new DoubCoord(Row, Col - 1);
@@ -73,7 +73,7 @@ namespace Hexstor.Module.Client.ViewModels
                         newCoord = new DoubCoord(Row+1, Col);
                         break;
                     case 5:
-                        newCoord = new DoubCoord(Row+1, Col - 1);
+                        newCoord = new DoubCoord(Row, Col - 1);
                         break;
                     case 6:
                         newCoord = new DoubCoord(Row-1, Col - 1);

@@ -102,7 +102,14 @@ public partial class Index : ModuleBase
             return;  // can't fly off the map
         }
 
-        newHex.Ship = shipHex.Ship;
+        // make a copy of the ship and add it to the new hex
+        newHex.Ship = new Ship
+        {
+            Heading = ship.Heading,
+            Style = ship.Style,
+            Level = ship.Level
+        };
+
         // remove the ship from the current hex
         shipHex.Ship = null;
         StateHasChanged();
