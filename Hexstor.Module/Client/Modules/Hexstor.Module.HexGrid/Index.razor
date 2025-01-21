@@ -22,11 +22,10 @@
         {
             for (int col = 0; col < _settingsVM.Columns; col++)
             {
-                var hex = new Hex
-                        {
-                            DoubCoord = new DoubCoord(row, col)
-                        };
-                <HexTile Hex="@hex" />
+                var hex = _hexes.SingleOrDefault(hex => 
+                                    hex.DoubCoord.Row == row 
+                                    && hex.DoubCoord.Col == col);
+                <HexTile Hex="@hex"/>
             }
         }
     </div>

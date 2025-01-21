@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hexstor.Module.Shared.Models
+namespace Hexstor.Module.Client.ViewModels
 {
 
     // enum for three styles of ships Red, Blue, and Yellow
@@ -36,8 +36,6 @@ namespace Hexstor.Module.Shared.Models
             _ => "R"
         };
         public int Level { get; set; } = 1;
-
-
 
     }
 }

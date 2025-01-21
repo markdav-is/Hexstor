@@ -10,8 +10,8 @@ using Oqtane.Models;
 using Oqtane.Modules;
 using Oqtane.Shared;
 using Oqtane.Services;
-using Hexstor.Module.Shared.Models;
 using Hexstor.Module.Template.Services;
+using Hexstor.Module.Client.ViewModels;
 
 namespace Hexstor.Module.HexGrid;
 
@@ -22,6 +22,7 @@ public partial class HexTile : ModuleControlBase
 
     [Parameter]
     public Hex Hex { get; set; }
+
 
 }
 

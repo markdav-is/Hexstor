@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hexstor.Module.Shared.Models
+namespace Hexstor.Module.Client.ViewModels
 {
     /// <summary>
     /// Represents a double-coordinate hex system.
