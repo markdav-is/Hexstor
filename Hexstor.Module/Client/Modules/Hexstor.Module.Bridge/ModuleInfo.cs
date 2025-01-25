@@ -9,9 +9,9 @@ namespace Hexstor.Module.Bridge
         {
             Name = "Bridge",
             Description = "The Hexstor Ship Control Panel",
-            Version = "1.0.1",
+            Version = "1.0.2",
             ServerManagerType = "Hexstor.Module.Template.Manager.TemplateManager, Hexstor.Module.Template.Server.Oqtane",
-            ReleaseVersions = "1.0.1",
+            ReleaseVersions = "1.0.2",
             Dependencies = "Hexstor.Module.Template.Shared.Oqtane,MudBlazor",
             PackageName = "Hexstor.Template" 
         };
