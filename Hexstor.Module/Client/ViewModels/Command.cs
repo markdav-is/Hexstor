@@ -8,35 +8,33 @@ namespace Hexstor.Module.Client.ViewModels
 {
 
     // enum for three styles of ships Red, Blue, and Yellow
-    public enum ShipStyle
+    public enum CommandType
     {
-        Red,
-        Blue,
-        Yellow
+        Play,
+        Left,
+        Right,
+        Forward,
+        Fire
     }
+
+    public enum MapCorner
+    {
+        NW, NE, SW, SE
+    }
+
 
     /// <summary>
     /// Represents a double-coordinate hex system.
     /// https://www.redblobgames.com/grids/hexagons/#coordinates-doubled
     /// </summary>
-    public class Ship
+    public class Command
     {
         // constrctor takes a row and column and calculates the x and y coordinates
-        public Ship()
+        public Command()
         {
         }
-
         public int PlayerId { get; set; }
-        public int Heading { get; set; } = 1;
-        public ShipStyle Style { get; set; } = ShipStyle.Red;
-        public string StyleCode => Style switch
-        {
-            ShipStyle.Red => "R",
-            ShipStyle.Blue => "B",
-            ShipStyle.Yellow => "Y",
-            _ => "R"
-        };
-        public int Level { get; set; } = 1;
-
+        public CommandType Type { get; set; }
+        public MapCorner StartCorner{ get; set; } = MapCorner.NW;
     }
 }
