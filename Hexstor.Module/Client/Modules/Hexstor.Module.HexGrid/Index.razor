@@ -25,7 +25,7 @@
                 var hex = _hexes.SingleOrDefault(hex => 
                                     hex.DoubCoord.Row == row 
                                     && hex.DoubCoord.Col == col);
-                <HexTile Hex="@hex"/>
+                <HexTile HexClicked="HexClicked" Hex="@hex"/>
             }
         }
     </div>

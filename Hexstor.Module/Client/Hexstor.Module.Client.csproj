@@ -24,6 +24,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\ink\compiler\ink_compiler.csproj" />
 		<ProjectReference Include="..\..\ink\ink-engine-runtime\ink-engine-runtime.csproj" />
+		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Server\Oqtane.Server.csproj" />
 		<ProjectReference Include="..\Shared\Hexstor.Module.Shared.csproj" />
 	</ItemGroup>
 
