@@ -23,6 +23,14 @@ public partial class HexTile : ModuleControlBase
     [Parameter]
     public Hex Hex { get; set; }
 
+    [Parameter]
+    public EventCallback<Hex> HexClicked { get; set; }
+
+    private async Task Clicked()
+    {
+        Hex.Selected = !Hex.Selected;
+        await HexClicked.InvokeAsync(Hex);
+    }
 
 }
 

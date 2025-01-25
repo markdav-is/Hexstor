@@ -126,6 +126,13 @@ public partial class Index : ModuleBase
         StateHasChanged();
     }
 
+    private void HexClicked(Hex hex)
+    {
+        foreach (var h in _hexes.Where(h => h.Id != hex.Id))
+        {
+            h.Selected = false;
+        }
+    }
 
     public void Dispose()
     {

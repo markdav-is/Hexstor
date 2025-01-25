@@ -19,7 +19,9 @@ namespace Hexstor.Module.Client.ViewModels
 
         public DoubCoord DoubCoord { get; set; }
         public Ship Ship { get; set; }
-
+        public bool Selected { get; set; }
+        public bool ContainsShip { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
     }
 }
