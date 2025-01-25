@@ -44,27 +44,50 @@ public partial class ShipCounter: ModuleControlBase
 
         if (args.PropertyName == "Command")
         {
-            if (SiteState.Properties.Command == "Left")
+            if (SiteState.Properties.Command is Command)
             {
-                Ship.Heading = Ship.Heading - 1;
-                if (Ship.Heading < 1)
+                var command = (Command)SiteState.Properties.Command;
+                if (command.Type==CommandType.Left && command.PlayerId == Ship.PlayerId)
                 {
-                    Ship.Heading = 6;
+                    Ship.Heading = Ship.Heading - 1;
+                    if (Ship.Heading < 1)
+                    {
+                        Ship.Heading = 6;
+                    }
+                    StateHasChanged();
                 }
-                StateHasChanged();
+                if (command.Type == CommandType.Right && command.PlayerId == Ship.PlayerId)
+                {
+                    Ship.Heading = Ship.Heading + 1;
+                    if (Ship.Heading > 6)
+                    {
+                        Ship.Heading = 1;
+                    }
+                    StateHasChanged();
+                }
             }
-            if (SiteState.Properties.Command == "Right")
+            else  //legacy support for strings.
             {
-                Ship.Heading = Ship.Heading + 1;
-                if (Ship.Heading > 6)
+                if (SiteState.Properties.Command == "Left")
                 {
-                    Ship.Heading = 1;
+                    Ship.Heading = Ship.Heading - 1;
+                    if (Ship.Heading < 1)
+                    {
+                        Ship.Heading = 6;
+                    }
+                    StateHasChanged();
                 }
-                StateHasChanged();
+                if (SiteState.Properties.Command == "Right")
+                {
+                    Ship.Heading = Ship.Heading + 1;
+                    if (Ship.Heading > 6)
+                    {
+                        Ship.Heading = 1;
+                    }
+                    StateHasChanged();
+                }
             }
-
         }
-
     }
 
     public void Dispose()

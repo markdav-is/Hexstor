@@ -12,6 +12,9 @@ using Oqtane.Shared;
 using Oqtane.Services;
 
 using Hexstor.Module.Template.Services;
+using Hexstor.Module.Client.ViewModels;
+using System.Reflection.Metadata;
+using System.Reflection;
 
 namespace Hexstor.Module.Bridge;
 
@@ -26,7 +29,7 @@ public partial class Index : ModuleBase
         new Resource { ResourceType = ResourceType.Stylesheet,  Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
         new Resource { ResourceType = ResourceType.Stylesheet,  Url = "_content/MudBlazor/MudBlazor.min.css" },
         new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
-        new Resource { ResourceType = ResourceType.Script,      Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
+        new Resource { ResourceType = ResourceType.Script,      Url = "_content/MudBlazor/MudBlazor.min.js", Location = Oqtane.Shared.ResourceLocation.Body, Level = ResourceLevel.Site },
         new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
     };	
     private bool IsLoaded;
@@ -50,27 +53,48 @@ public partial class Index : ModuleBase
 
     private async Task Play()
     {
-        SiteState.Properties.Command = "Play";
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.Fire,
+            PlayerId = ModuleState.ModuleId,
+            StartCorner = MapCorner.NW,  // move to settings
+        };
     }
 
     private async Task Left()
     {
-        SiteState.Properties.Command = "Left";
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.Left,
+            PlayerId = ModuleState.ModuleId,
+        };
     }
 
     private async Task Right()
     {
-        SiteState.Properties.Command = "Right";
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.Right,
+            PlayerId = ModuleState.ModuleId,
+        };
     }
 
     private async Task Forward()
     {
-        SiteState.Properties.Command = "Forward";
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.Fire,
+            PlayerId = ModuleState.ModuleId,
+        };
     }
 
     private async Task Fire()
     {
-        SiteState.Properties.Command = "Fire";
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.Fire,
+            PlayerId = ModuleState.ModuleId,
+        };
     }
 
 

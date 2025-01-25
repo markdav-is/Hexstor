@@ -66,24 +66,27 @@ public partial class Index : ModuleBase
 
     private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
     {
-        if (args.PropertyName == "Command")
+        if (SiteState.Properties.Command is Command)
         {
-            if (SiteState.Properties.Command == "Forward")
+            var command = (Command)SiteState.Properties.Command;
+            if (command.Type == CommandType.Forward)
             {
-                MoveShipForward();
+                MoveShipForward(command.PlayerId);
             }
-            if (SiteState.Properties.Command == "Play")
+            if (command.Type == CommandType.Play)
             {
-                ResetShip();
+                ResetShip(command);
             }
 
         }
     }
 
-    private void MoveShipForward()
+    private void MoveShipForward(int playerId)
     {
         // find hex with a ship
-        var shipHex = _hexes.FirstOrDefault(h => h.Ship != null);
+        var shipHex = _hexes.FirstOrDefault(h => h.Ship != null 
+            && h.Ship.PlayerId==playerId);
+
         if (shipHex == null)
         {
             return;  // no ship, no work to do
@@ -115,14 +118,43 @@ public partial class Index : ModuleBase
         StateHasChanged();
     }
 
-    private void ResetShip() {
-        // remove all ships from the hexes
-        foreach (var hex in _hexes.Where(h => h.Ship != null))
+    private void ResetShip(Command command) {
+        // remove all ships from the hexes for the player
+        foreach (var hex in _hexes.Where(h => h.Ship != null && h.Ship.PlayerId==command.PlayerId))
         {
             hex.Ship = null;
         }
-        // add a ship to the first hex
-        _hexes.First().Ship = new Ship { Heading = 3, Style = ShipStyle.Red, Level = 2 };
+        switch (command.StartCorner)
+        {
+            case MapCorner.NW:
+                _hexes.First().Ship = new Ship { 
+                        Heading = 3, 
+                        Style = ShipStyle.Red, 
+                        Level = 2, 
+                        PlayerId = command.PlayerId };
+                break;
+            case MapCorner.NE:
+                _hexes[_settingsVM.Columns*_settingsVM.Rows].Ship = new Ship { 
+                        Heading = 5, 
+                        Style = ShipStyle.Red, 
+                        Level = 2, 
+                        PlayerId = command.PlayerId };
+                break;
+            case MapCorner.SW:
+                _hexes[_settingsVM.Columns * _settingsVM.Rows-_settingsVM.Rows].Ship = new Ship { 
+                        Heading = 2, 
+                        Style = ShipStyle.Red, 
+                        Level = 2, 
+                        PlayerId = command.PlayerId };
+                break;
+            case MapCorner.SE:
+                _hexes.Last().Ship = new Ship { 
+                        Heading = 6, 
+                        Style = ShipStyle.Red, 
+                        Level = 2, 
+                        PlayerId = command.PlayerId };
+                break;
+        }
         StateHasChanged();
     }
 
