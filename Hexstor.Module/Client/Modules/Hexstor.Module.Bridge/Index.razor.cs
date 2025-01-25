@@ -55,7 +55,7 @@ public partial class Index : ModuleBase
     {
         SiteState.Properties.Command = new Command
         {
-            Type = CommandType.Fire,
+            Type = CommandType.Play,
             PlayerId = ModuleState.ModuleId,
             StartCorner = MapCorner.NW,  // move to settings
         };
@@ -83,7 +83,7 @@ public partial class Index : ModuleBase
     {
         SiteState.Properties.Command = new Command
         {
-            Type = CommandType.Fire,
+            Type = CommandType.Forward,
             PlayerId = ModuleState.ModuleId,
         };
     }

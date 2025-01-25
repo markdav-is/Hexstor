@@ -66,21 +66,24 @@ public partial class Index : ModuleBase
 
     private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
     {
-        if (SiteState.Properties.Command is Command)
+        if (args.PropertyName == "Command")
         {
-            var command = (Command)SiteState.Properties.Command;
-            if (command.Type == CommandType.Forward)
-            {
-                MoveShipForward(command.PlayerId);
-            }
-            if (command.Type == CommandType.Play)
-            {
-                ResetShip(command);
-            }
 
+            if (SiteState.Properties.Command is Command)
+            {
+                var command = (Command)SiteState.Properties.Command;
+                if (command.Type == CommandType.Forward)
+                {
+                    MoveShipForward(command.PlayerId);
+                }
+                if (command.Type == CommandType.Play)
+                {
+                    ResetShip(command);
+                }
+
+            }
         }
     }
-
     private void MoveShipForward(int playerId)
     {
         // find hex with a ship
@@ -110,7 +113,8 @@ public partial class Index : ModuleBase
         {
             Heading = ship.Heading,
             Style = ship.Style,
-            Level = ship.Level
+            Level = ship.Level,
+            PlayerId = ship.PlayerId
         };
 
         // remove the ship from the current hex
