@@ -28,6 +28,7 @@ namespace Hexstor.Module.Client.ViewModels
 
         public int PlayerId { get; set; }
         public int Heading { get; set; } = 1;
+
         public ShipStyle Style { get; set; } = ShipStyle.Red;
         public string StyleCode => Style switch
         {
@@ -37,6 +38,17 @@ namespace Hexstor.Module.Client.ViewModels
             _ => "R"
         };
         public int Level { get; set; } = 1;
+
+        // Targetting, Range settings
+        public bool isRangeFinderShown { get; set; } = false;
+        public int AttackRange { get; set; } = 3;
+        // bit of a stretch, this would be better defined in a Weapon class instead of part of the ship
+        public enum RangeShapes  {
+            Line,
+            Cone,
+            Circle
+        }
+        public RangeShapes RangeShape { get; set; } = RangeShapes.Cone;
 
     }
 }

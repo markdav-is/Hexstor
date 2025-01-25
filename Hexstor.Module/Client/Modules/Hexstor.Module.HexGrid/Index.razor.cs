@@ -14,6 +14,7 @@ using Hexstor.Module.Client.ViewModels;
 using Hexstor.Module.Template.Services;
 using System.ComponentModel;
 using System.Linq;
+using static MudBlazor.CategoryTypes;
 
 namespace Hexstor.Module.HexGrid;
 
@@ -87,8 +88,7 @@ public partial class Index : ModuleBase
     private void MoveShipForward(int playerId)
     {
         // find hex with a ship
-        var shipHex = _hexes.FirstOrDefault(h => h.Ship != null 
-            && h.Ship.PlayerId==playerId);
+        var shipHex = FindHexByPlayer(playerId);
 
         if (shipHex == null)
         {
@@ -170,6 +170,41 @@ public partial class Index : ModuleBase
         }
     }
 
+    // Toggle highlighting hexes in range of players ship
+    private void ToggleRangeFinder(int playerId, Ship.RangeShapes? rangeShape)
+    {
+        var shipHex = FindHexByPlayer(playerId);
+        if (shipHex != null)
+        {
+            return;
+        }
+        var highlightHex = !shipHex.Ship.isRangeFinderShown;
+        // Stretch goal: add cone then circle targetting
+        var targetShape = rangeShape ?? shipHex.Ship.RangeShape; 
+        if (targetShape == Ship.RangeShapes.Line)
+        {
+            var nextInLine = shipHex;
+            var shipHeading = shipHex.Ship.Heading; 
+            for (var i = 1; i < shipHex.Ship.AttackRange; i++)
+            {
+                var forwardCoord = nextInLine.DoubCoord.Forward(shipHeading);
+                nextInLine = _hexes.FirstOrDefault(
+                    h => h.DoubCoord.Row == forwardCoord.Row
+                    && h.DoubCoord.Col == forwardCoord.Col);
+                if (nextInLine == null)
+                {
+                    break;
+                }
+                nextInLine.Selected = highlightHex;
+            }
+        }
+    }
+    // helper function return first hex containing Players ship
+    private Hex FindHexByPlayer(int playerId)
+    {
+        return _hexes.FirstOrDefault(h => h.Ship != null
+            && h.Ship.PlayerId == playerId);
+    }
     public void Dispose()
     {
         ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged -= HandlePropertyChanged;

@@ -14,7 +14,8 @@ namespace Hexstor.Module.Client.ViewModels
         Left,
         Right,
         Forward,
-        Fire
+        Fire,
+        ToggleRangeFinder
     }
 
     public enum MapCorner

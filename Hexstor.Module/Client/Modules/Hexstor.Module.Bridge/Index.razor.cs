@@ -97,6 +97,15 @@ public partial class Index : ModuleBase
         };
     }
 
+    private async Task ToggleRangeFinder()
+    {
+        SiteState.Properties.Command = new Command
+        {
+            Type = CommandType.ToggleRangeFinder,
+            PlayerId = ModuleState.ModuleId,
+        };
+    }
+
 
     static bool IsSuccessStatusCode(HttpStatusCode statusCode) { 
         return (int)statusCode >= 200 && (int)statusCode <= 299; 
