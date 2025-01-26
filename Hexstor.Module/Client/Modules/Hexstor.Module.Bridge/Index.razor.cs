@@ -37,6 +37,9 @@ public partial class Index : ModuleBase
     private string _shipCode;
     private string _shipImage;
 
+
+    public bool isRangeFinderShown { get; set; } = false;
+
     protected override async Task OnInitializedAsync()
     {
         try
@@ -56,6 +59,7 @@ public partial class Index : ModuleBase
 
     private async Task Play()
     {
+        await ToggleRangeFinder(false);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.Play,
@@ -67,6 +71,7 @@ public partial class Index : ModuleBase
 
     private async Task Left()
     {
+        await ToggleRangeFinder(false);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.Left,
@@ -76,6 +81,7 @@ public partial class Index : ModuleBase
 
     private async Task Right()
     {
+        await ToggleRangeFinder(false);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.Right,
@@ -85,6 +91,7 @@ public partial class Index : ModuleBase
 
     private async Task Forward()
     {
+        await ToggleRangeFinder(false);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.Forward,
@@ -94,6 +101,7 @@ public partial class Index : ModuleBase
 
     private async Task Fire()
     {
+        await ToggleRangeFinder(false);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.Fire,
@@ -101,13 +109,18 @@ public partial class Index : ModuleBase
         };
     }
 
-    private async Task ToggleRangeFinder()
+    private async Task ToggleRangeFinder(bool? setVisible)
     {
+        isRangeFinderShown = (bool)((setVisible.HasValue) ? setVisible : !isRangeFinderShown);
         SiteState.Properties.Command = new Command
         {
             Type = CommandType.ToggleRangeFinder,
             PlayerId = ModuleState.ModuleId,
+            AttackRange = _settingsVM.AttackRange,
+            AttackShape = _settingsVM.RangeShape,
+            RangeFinderVisible = isRangeFinderShown
         };
+        
     }
 
 

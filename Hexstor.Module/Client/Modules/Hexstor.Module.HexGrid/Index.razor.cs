@@ -83,7 +83,7 @@ public partial class Index : ModuleBase
                 }
                 if (command.Type == CommandType.ToggleRangeFinder)
                 {
-                    ToggleRangeFinder(command.PlayerId, null);
+                    ToggleRangeFinder(command);
                 }
 
             }
@@ -178,17 +178,18 @@ public partial class Index : ModuleBase
     }
 
     // Toggle highlighting hexes in range of players ship
-    private void ToggleRangeFinder(int playerId, Ship.RangeShapes? rangeShape)
+    private void ToggleRangeFinder(Command command)
     {
+        var playerId = command.PlayerId;
+        var targetShape = command.AttackShape;
         var shipHex = FindHexByPlayer(playerId);
         if (shipHex == null)
         {
             return;
         }
-        var highlightHex = !shipHex.Ship.isRangeFinderShown;
+        var highlightHex = command.RangeFinderVisible;
         // Stretch goal: add cone then circle targetting
-        var targetShape = rangeShape ?? shipHex.Ship.RangeShape; 
-        if (targetShape == Ship.RangeShapes.Line)
+        if (targetShape == Bridge.SettingsViewModel.RangeShapes.Line)
         {
             var nextInLine = shipHex;
             var shipHeading = shipHex.Ship.Heading; 
