@@ -1,0 +1,53 @@
+﻿@using System.ComponentModel
+@inject SiteState SiteState
+@inherits ModuleBase
+
+<div class="music-player">
+    <div class="track-info">
+        <span>Now Playing: @AudioSourceUrl</span>
+    </div>
+    <audio @ref="audioElement" autoplay src="@AudioSourceUrl"></audio>
+    <div class="controls">
+        <button @onclick="PlayAudio">Play</button>
+        <button @onclick="PauseAudio">Pause</button>
+        <label>
+            Volume: <input type="range" min="0" max="100" @bind="Volume" />
+        </label>
+    </div>
+</div>
+
+@code {
+    private ElementReference audioElement;
+    private string AudioSourceUrl { get; set; } = "/music/default.mp3";
+    private int Volume { get; set; } = 50;
+
+    protected override Task OnInitializedAsync()
+    {
+        // Cast to INotifyPropertyChanged to handle PropertyChanged events
+        if (SiteState.Properties is INotifyPropertyChanged propertyChangedNotifier)
+        {
+            propertyChangedNotifier.PropertyChanged += OnMusicPropertyChanged;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    private void OnMusicPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == "Music")
+        {
+            AudioSourceUrl = SiteState.Properties["Music"]?.ToString() ?? "/music/default.mp3";
+            StateHasChanged();
+        }
+    }
+
+    private async Task PlayAudio()
+    {
+        await JSRuntime.InvokeVoidAsync("playAudio", audioElement);
+    }
+
+    private async Task PauseAudio()
+    {
+        await JSRuntime.InvokeVoidAsync("pauseAudio", audioElement);
+    }
+}
