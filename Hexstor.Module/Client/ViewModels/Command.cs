@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hexstor.Module.Bridge;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,8 @@ namespace Hexstor.Module.Client.ViewModels
         Left,
         Right,
         Forward,
-        Fire
+        Fire,
+        ToggleRangeFinder
     }
 
     public enum MapCorner
@@ -37,5 +39,8 @@ namespace Hexstor.Module.Client.ViewModels
         public CommandType Type { get; set; }
         public MapCorner StartCorner{ get; set; } = MapCorner.NW;
         public ShipStyle ShipStyle { get; set; } = ShipStyle.Red;
+        public int AttackRange { get; internal set; }
+        public bool RangeFinderVisible { get; internal set; }
+        internal SettingsViewModel.RangeShapes AttackShape { get; set; }
     }
 }

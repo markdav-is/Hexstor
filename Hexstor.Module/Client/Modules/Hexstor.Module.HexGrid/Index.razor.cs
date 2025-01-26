@@ -81,6 +81,10 @@ public partial class Index : ModuleBase
                 {
                     ResetShip(command);
                 }
+                if (command.Type == CommandType.ToggleRangeFinder)
+                {
+                    ToggleRangeFinder(command);
+                }
 
             }
         }
@@ -88,8 +92,7 @@ public partial class Index : ModuleBase
     private void MoveShipForward(int playerId)
     {
         // find hex with a ship
-        var shipHex = _hexes.FirstOrDefault(h => h.Ship != null 
-            && h.Ship.PlayerId==playerId);
+        var shipHex = FindHexByPlayer(playerId);
 
         if (shipHex == null)
         {
@@ -174,6 +177,44 @@ public partial class Index : ModuleBase
         }
     }
 
+    // Toggle highlighting hexes in range of players ship
+    private void ToggleRangeFinder(Command command)
+    {
+        var playerId = command.PlayerId;
+        var targetShape = command.AttackShape;
+        var shipHex = FindHexByPlayer(playerId);
+        if (shipHex == null)
+        {
+            return;
+        }
+        var highlightHex = command.RangeFinderVisible;
+        // Stretch goal: add cone then circle targetting
+        if (targetShape == Bridge.SettingsViewModel.RangeShapes.Line)
+        {
+            var nextInLine = shipHex;
+            var shipHeading = shipHex.Ship.Heading; 
+            for (var i = 1; i < shipHex.Ship.AttackRange; i++)
+            {
+                var forwardCoord = nextInLine.DoubCoord.Forward(shipHeading);
+                nextInLine = _hexes.FirstOrDefault(
+                    h => h.DoubCoord.Row == forwardCoord.Row
+                    && h.DoubCoord.Col == forwardCoord.Col);
+                if (nextInLine == null)
+                {
+                    break;
+                }
+                nextInLine.Selected = highlightHex;
+            }
+        }
+        shipHex.Ship.isRangeFinderShown = highlightHex;
+        StateHasChanged();
+    }
+    // helper function return first hex containing Players ship
+    private Hex FindHexByPlayer(int playerId)
+    {
+        return _hexes.FirstOrDefault(h => h.Ship != null
+            && h.Ship.PlayerId == playerId);
+    }
     public void Dispose()
     {
         ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged -= HandlePropertyChanged;
