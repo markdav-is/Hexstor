@@ -9,9 +9,9 @@ namespace Hexstor.Module.Template
         {
             Name = "Template",
             Description = "The Hexstor Template Module",
-            Version = "1.0.2",
+            Version = "1.0.3",
             ServerManagerType = "Hexstor.Module.Template.Manager.TemplateManager, Hexstor.Module.Template.Server.Oqtane",
-            ReleaseVersions = "1.0.2",
+            ReleaseVersions = "1.0.3",
             Dependencies = "Hexstor.Module.Template.Shared.Oqtane,MudBlazor",
             PackageName = "Hexstor.Template" 
         };
