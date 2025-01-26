@@ -1,0 +1,80 @@
+﻿@namespace Hexstor.Module.MusicPlayer
+@using System.Collections.Generic;
+@using System.ComponentModel;
+@inject SiteState SiteState
+@inherits ModuleBase
+
+<MudThemeProvider IsDarkMode=true />
+<MudPopoverProvider />
+
+<div class="music-player">
+    <audio id="audioElement" autoplay src="@AudioSourceUrl"></audio>
+    <MudToggleIconButton 
+        Toggled="@_paused"
+        ToggledChanged="OnToggledChanged"
+        Icon="@MudBlazor.Icons.Material.Filled.PlayCircle"
+        Color="@Color.Success"
+        ToggledIcon="@MudBlazor.Icons.Material.Filled.PauseCircle"
+        ToggledColor="@Color.Error" />
+</div>
+
+@code {
+    private ElementReference audioElement;
+    private string AudioSourceUrl { get; set; } = "/music/battle.mp3";
+    private bool _paused = false;
+
+    public override List<Resource> Resources => new List<Resource>()
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = "_content/MudBlazor/MudBlazor.min.css" },
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
+        new Resource { ResourceType = ResourceType.Script,      Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
+        new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
+    };
+
+
+    protected override Task OnInitializedAsync()
+    {
+        // Cast to INotifyPropertyChanged to handle PropertyChanged events
+        if (SiteState.Properties is INotifyPropertyChanged propertyChangedNotifier)
+        {
+            propertyChangedNotifier.PropertyChanged += OnMusicPropertyChanged;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    public async Task OnToggledChanged(bool toggled)
+    {
+        // Because variable is not two-way bound, we need to update it ourselves.
+        _paused = toggled;
+
+        if (_paused)
+        {
+            await PlayAudio();
+        }
+        else {
+            await PauseAudio();
+        }
+    }
+
+
+    private void OnMusicPropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == "Music")
+        {
+            AudioSourceUrl = SiteState.Properties.Music;
+            StateHasChanged();
+        }
+    }
+
+    private async Task PlayAudio()
+    {
+        await JSRuntime.InvokeVoidAsync("playAudio", "audioElement");
+    }
+
+    private async Task PauseAudio()
+    {
+        await JSRuntime.InvokeVoidAsync("pauseAudio", "audioElement");
+    }
+}
