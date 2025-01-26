@@ -33,7 +33,9 @@ public partial class Index : ModuleBase
         new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
     };	
     private bool IsLoaded;
-    private SettingsViewModel _settingsVM; 
+    private SettingsViewModel _settingsVM;
+    private string _shipCode;
+    private string _shipImage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -41,7 +43,8 @@ public partial class Index : ModuleBase
         {
             var moduleSettings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
             _settingsVM = new SettingsViewModel(SettingService, moduleSettings);
-           
+            _shipCode = _settingsVM.ShipStyle.ToString().Substring(0, 1);
+            _shipImage = $"/images/Ship{_shipCode}/Ship_LVL_{_settingsVM.ShipLevel}.png";
             IsLoaded = true;
         }
         catch (Exception ex)
@@ -57,7 +60,8 @@ public partial class Index : ModuleBase
         {
             Type = CommandType.Play,
             PlayerId = ModuleState.ModuleId,
-            StartCorner = MapCorner.NW,  // move to settings
+            StartCorner = _settingsVM.StartCorner,
+            ShipStyle = _settingsVM.ShipStyle,
         };
     }
 

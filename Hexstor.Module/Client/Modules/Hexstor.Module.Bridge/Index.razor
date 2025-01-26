@@ -19,19 +19,19 @@ else
     <MudCard>
         <MudCardHeader>
             <CardHeaderAvatar>
-                <MudAvatar Color="Color.Secondary">C</MudAvatar>
+                <MudAvatar Color="Color.Secondary">@_shipCode</MudAvatar>
             </CardHeaderAvatar>
             <CardHeaderContent>
-                <MudText Typo="Typo.body1">Control Panel</MudText>
-                <MudText Typo="Typo.body2">Ship System Status</MudText>
+                <MudText Typo="Typo.body1">Bridge</MudText>
+                <MudText Typo="Typo.body2">Ship Control</MudText>
             </CardHeaderContent>
             <CardHeaderActions>
                 <MudIconButton Icon="@MudBlazor.Icons.Material.Filled.PlayArrow" Color="Color.Default" OnClick="Play" />
             </CardHeaderActions>
         </MudCardHeader>
-        <MudCardMedia Image="/images/ShipR/Ship_LVL_2.png" Height="400"/>
+        <MudCardMedia Image="@_shipImage" Height="300"/>
         <MudCardContent>
-            <MudText Typo="Typo.body2">Ship Style B Level 2</MudText>
+            <MudText Typo="Typo.body2">Ship Style @_shipCode Level @_settingsVM.ShipLevel</MudText>
         </MudCardContent>
         <MudCardActions>
             <MudIconButton Icon="@MudBlazor.Icons.Material.Filled.TurnLeft" 

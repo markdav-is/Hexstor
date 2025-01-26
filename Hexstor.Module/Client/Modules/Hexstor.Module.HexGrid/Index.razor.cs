@@ -14,6 +14,7 @@ using Hexstor.Module.Client.ViewModels;
 using Hexstor.Module.Template.Services;
 using System.ComponentModel;
 using System.Linq;
+using Oqtane.Documentation;
 
 namespace Hexstor.Module.HexGrid;
 
@@ -128,33 +129,35 @@ public partial class Index : ModuleBase
         {
             hex.Ship = null;
         }
+        int ne = (_settingsVM.Columns - 1) * (_settingsVM.Rows - 1);
+        int sw = (_settingsVM.Rows - 1);
         switch (command.StartCorner)
         {
             case MapCorner.NW:
                 _hexes.First().Ship = new Ship { 
                         Heading = 3, 
-                        Style = ShipStyle.Red, 
-                        Level = 2, 
+                        Style = command.ShipStyle, 
+                        Level = 1, 
                         PlayerId = command.PlayerId };
                 break;
             case MapCorner.NE:
-                _hexes[_settingsVM.Columns*_settingsVM.Rows].Ship = new Ship { 
+                _hexes[ne].Ship = new Ship { 
                         Heading = 5, 
-                        Style = ShipStyle.Red, 
+                        Style = command.ShipStyle, 
                         Level = 2, 
                         PlayerId = command.PlayerId };
                 break;
             case MapCorner.SW:
-                _hexes[_settingsVM.Columns * _settingsVM.Rows-_settingsVM.Rows].Ship = new Ship { 
+                _hexes[sw].Ship = new Ship { 
                         Heading = 2, 
-                        Style = ShipStyle.Red, 
+                        Style = command.ShipStyle, 
                         Level = 2, 
                         PlayerId = command.PlayerId };
                 break;
             case MapCorner.SE:
                 _hexes.Last().Ship = new Ship { 
                         Heading = 6, 
-                        Style = ShipStyle.Red, 
+                        Style = command.ShipStyle, 
                         Level = 2, 
                         PlayerId = command.PlayerId };
                 break;
