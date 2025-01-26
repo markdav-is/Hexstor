@@ -178,7 +178,7 @@ public partial class Index : ModuleBase
     private void ToggleRangeFinder(int playerId, Ship.RangeShapes? rangeShape)
     {
         var shipHex = FindHexByPlayer(playerId);
-        if (shipHex != null)
+        if (shipHex == null)
         {
             return;
         }
