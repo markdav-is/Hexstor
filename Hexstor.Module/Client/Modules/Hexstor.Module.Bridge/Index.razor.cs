@@ -109,7 +109,7 @@ public partial class Index : ModuleBase
         };
     }
 
-    private async Task ToggleRangeFinder(bool? setVisible)
+    private async Task ToggleRangeFinder(bool? setVisible = true)
     {
         isRangeFinderShown = (bool)((setVisible.HasValue) ? setVisible : !isRangeFinderShown);
         SiteState.Properties.Command = new Command

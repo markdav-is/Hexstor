@@ -43,7 +43,7 @@ else
             <MudIconButton Icon="@MudBlazor.Icons.Custom.Uncategorized.Radioactive" 
                 Color="Color.Error" Size="Size.Large" OnClick="Fire" />
             <MudIconButton Icon="@MudBlazor.Icons.Material.Filled.MilitaryTech"
-                           Color="Color.Default" Size="Size.Large" OnClick="ToggleRangeFinder" />
+                           Color="Color.Default" Size="Size.Large" OnClick="@(a=>ToggleRangeFinder(true))" />
         </MudCardActions>
     </MudCard>
 }
