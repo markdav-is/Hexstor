@@ -7,10 +7,13 @@ namespace Hexstor.Module.MusicPlayer
     {
         public ModuleDefinition ModuleDefinition => new ModuleDefinition
         {
-            Name = "MusicPlayer",
-            Description = "A module for playing background music.",
-            Version = "1.0.0",
-            PackageName = "Hexstor.Module.MusicPlayer"
+            Name = "Music Player",
+            Description = "The Hexstor Music Module",
+            Version = "1.0.3",
+            ServerManagerType = "Hexstor.Module.Template.Manager.TemplateManager, Hexstor.Module.Template.Server.Oqtane",
+            ReleaseVersions = "1.0.3",
+            Dependencies = "Hexstor.Module.Music.Shared.Oqtane",
+            PackageName = "Hexstor.Template"
         };
     }
 }

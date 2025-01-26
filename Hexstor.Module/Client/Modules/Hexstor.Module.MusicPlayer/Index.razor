@@ -1,4 +1,6 @@
-﻿@using System.ComponentModel
+﻿@namespace Hexstor.Module.MusicPlayer
+@using System.Collections.Generic;
+@using System.ComponentModel;
 @inject SiteState SiteState
 @inherits ModuleBase
 
@@ -6,20 +8,23 @@
     <div class="track-info">
         <span>Now Playing: @AudioSourceUrl</span>
     </div>
-    <audio @ref="audioElement" autoplay src="@AudioSourceUrl"></audio>
+    <audio id="audioElement" autoplay src="@AudioSourceUrl"></audio>
     <div class="controls">
         <button @onclick="PlayAudio">Play</button>
         <button @onclick="PauseAudio">Pause</button>
-        <label>
-            Volume: <input type="range" min="0" max="100" @bind="Volume" />
-        </label>
     </div>
 </div>
 
 @code {
     private ElementReference audioElement;
-    private string AudioSourceUrl { get; set; } = "/music/default.mp3";
+    private string AudioSourceUrl { get; set; } = "/music/battle.mp3";
     private int Volume { get; set; } = 50;
+
+    public override List<Resource> Resources => new List<Resource>()
+    {
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
+        new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
+    };
 
     protected override Task OnInitializedAsync()
     {
@@ -36,18 +41,18 @@
     {
         if (e.PropertyName == "Music")
         {
-            AudioSourceUrl = SiteState.Properties["Music"]?.ToString() ?? "/music/default.mp3";
+            AudioSourceUrl = SiteState.Properties.Music;
             StateHasChanged();
         }
     }
 
     private async Task PlayAudio()
     {
-        await JSRuntime.InvokeVoidAsync("playAudio", audioElement);
+        await JSRuntime.InvokeVoidAsync("playAudio", "audioElement");
     }
 
     private async Task PauseAudio()
     {
-        await JSRuntime.InvokeVoidAsync("pauseAudio", audioElement);
+        await JSRuntime.InvokeVoidAsync("pauseAudio", "audioElement");
     }
 }

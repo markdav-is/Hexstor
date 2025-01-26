@@ -11,12 +11,6 @@
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<Compile Include="Modules\Hexstor.Module.MusicPlayer\Index.razor" />
-		<Compile Include="Modules\Hexstor.Module.MusicPlayer\Settings.razor" />
-	</ItemGroup>
-
-
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\ink\compiler\ink_compiler.csproj" />

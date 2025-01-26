@@ -1,6 +1,7 @@
 ﻿@using System.Collections.Generic
 @using System.Threading.Tasks
 @inject ISettingService SettingService
+@namespace Hexstor.Module.MusicPlayer
 @inherits ModuleBase
 
 <div class="settings">
@@ -16,7 +17,7 @@
 </div>
 
 @code {
-    private string _audioSourceUrl = "/music/default.mp3";
+    private string _audioSourceUrl = "/music/battle.mp3";
     private int _volume = 50;
 
     protected override async Task OnInitializedAsync()
@@ -25,7 +26,7 @@
 
         _audioSourceUrl = settings.TryGetValue("AudioSourceUrl", out var audioSource)
                           ? audioSource
-                          : "/music/default.mp3";
+                          : "/music/battle.mp3";
 
         _volume = settings.TryGetValue("Volume", out var volume) && int.TryParse(volume, out var vol)
                   ? vol
