@@ -1,0 +1,23 @@
+// Start of the story
+-> start
+
+== start ==
+It's kinda quiet here, isn't it?
+
+* [Turn Up Volume] 
+    -> left_path
+* [Play ambient music]
+    -> right_path
+
+== left_path ==
+now that the volume is up, let's go back to the beginning
+* [go back]
+    -> start
+
+== right_path ==
+if there's a music module on the page, you should hear music # music:ambience 
+
+* [all done]
+    -> END
+
+-> END
