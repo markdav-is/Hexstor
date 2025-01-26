@@ -81,6 +81,10 @@ public partial class Index : ModuleBase
                 {
                     ResetShip(command);
                 }
+                if (command.Type == CommandType.ToggleRangeFinder)
+                {
+                    ToggleRangeFinder(command.PlayerId, null);
+                }
 
             }
         }
@@ -198,6 +202,8 @@ public partial class Index : ModuleBase
                 nextInLine.Selected = highlightHex;
             }
         }
+        shipHex.Ship.isRangeFinderShown = highlightHex;
+        StateHasChanged();
     }
     // helper function return first hex containing Players ship
     private Hex FindHexByPlayer(int playerId)
