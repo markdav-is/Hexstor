@@ -9,9 +9,9 @@ namespace Hexstor.Module.HexGrid
         {
             Name = "HexGrid",
             Description = "The Hexstor HexGrid Module",
-            Version = "1.0.3",
+            Version = "1.0.4",
             ServerManagerType = "Hexstor.Module.Template.Manager.TemplateManager, Hexstor.Module.Template.Server.Oqtane",
-            ReleaseVersions = "1.0.3",
+            ReleaseVersions = "1.0.4",
             Dependencies = "Hexstor.Module.Template.Shared.Oqtane,MudBlazor",
             PackageName = "Hexstor.Template" 
         };

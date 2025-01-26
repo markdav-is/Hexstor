@@ -9,9 +9,9 @@ namespace Hexstor.Module.Ink
         {
             Name = "Ink",
             Description = "plays ink",
-            Version = "1.0.3",
+            Version = "1.0.4",
             ServerManagerType = "Hexstor.Module.Ink.Manager.InkManager, Hexstor.Module.Ink.Server.Oqtane",
-            ReleaseVersions = "1.0.3",
+            ReleaseVersions = "1.0.4",
             Dependencies = "Hexstor.Module.Ink.Shared.Oqtane",
             PackageName = "Hexstor.Module.Ink"
         };

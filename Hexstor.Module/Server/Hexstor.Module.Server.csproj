@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Product>Hexstor.Module.Template</Product>
     <Authors>Hexstor</Authors>
     <Company>Hexstor</Company>
