@@ -12,9 +12,9 @@ namespace Hexstor.Module.Lottie
         {
             Name = "Lottie",
             Description = "plays lotties",
-            Version = "1.0.2",
+            Version = "1.0.3",
             ServerManagerType = "Trailblazor.Module.Lottie.Manager.LottieManager, Trailblazor.Module.Lottie.Server.Oqtane",
-            ReleaseVersions = "1.0.2",
+            ReleaseVersions = "1.0.3",
             Dependencies = "Trailblazor.Module.Lottie.Shared.Oqtane",
             PackageName = "Trailblazor.Module.Lottie",
             Resources = new List<Resource>()

@@ -1,3 +1,4 @@
+using Hexstor.Module.Client.ViewModels;
 using MudBlazor;
 using Oqtane.Services;
 using System;
@@ -12,15 +13,26 @@ namespace Hexstor.Module.Bridge
     {
         public SettingsViewModel(ISettingService settingService, Dictionary<string, string> moduleSettings)
         {
-            Value = settingService.GetSetting(moduleSettings, nameof(Value), Value);
-        }
+            var shipStyleString = settingService.GetSetting(moduleSettings, nameof(ShipStyle), ShipStyle.Red.ToString());
+            var shipLevelString = settingService.GetSetting(moduleSettings, nameof(ShipLevel), "1");
+            var startCornerString = settingService.GetSetting(moduleSettings, nameof(StartCorner), MapCorner.NW.ToString());
 
-        public string Value { get; set; } = string.Empty;
-   
+            //convert from strings
+            ShipStyle = Enum.TryParse(shipStyleString, out ShipStyle style) ? style : ShipStyle.Red;
+            StartCorner = Enum.TryParse(startCornerString, out MapCorner corner) ? corner : MapCorner.NW;
+            ShipLevel = Int32.TryParse(shipLevelString, out int level) ? level : 1;
+        }
+        public ShipStyle ShipStyle { get; set; }
+        public int ShipLevel { get; set; }
+        public MapCorner StartCorner { get; set; }
+
+
         public void SetSettings(ISettingService settingService, Dictionary<string, string> moduleSettings) {
 
-            settingService.SetSetting(moduleSettings, nameof(Value), Value);
-       
+            settingService.SetSetting(moduleSettings, nameof(ShipStyle), ShipStyle.ToString());
+            settingService.SetSetting(moduleSettings, nameof(ShipLevel), ShipLevel.ToString());
+            settingService.SetSetting(moduleSettings, nameof(StartCorner), StartCorner.ToString());
+
         }
     }
 }

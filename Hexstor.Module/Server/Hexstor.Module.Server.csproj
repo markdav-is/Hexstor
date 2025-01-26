@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Product>Hexstor.Module.Template</Product>
     <Authors>Hexstor</Authors>
     <Company>Hexstor</Company>
