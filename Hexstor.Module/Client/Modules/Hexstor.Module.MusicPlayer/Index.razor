@@ -4,27 +4,34 @@
 @inject SiteState SiteState
 @inherits ModuleBase
 
+<MudThemeProvider IsDarkMode=true />
+<MudPopoverProvider />
+
 <div class="music-player">
-    <div class="track-info">
-        <span>Now Playing: @AudioSourceUrl</span>
-    </div>
     <audio id="audioElement" autoplay src="@AudioSourceUrl"></audio>
-    <div class="controls">
-        <button @onclick="PlayAudio">Play</button>
-        <button @onclick="PauseAudio">Pause</button>
-    </div>
+    <MudToggleIconButton 
+        Toggled="@_paused"
+        ToggledChanged="OnToggledChanged"
+        Icon="@MudBlazor.Icons.Material.Filled.PlayCircle"
+        Color="@Color.Success"
+        ToggledIcon="@MudBlazor.Icons.Material.Filled.PauseCircle"
+        ToggledColor="@Color.Error" />
 </div>
 
 @code {
     private ElementReference audioElement;
     private string AudioSourceUrl { get; set; } = "/music/battle.mp3";
-    private int Volume { get; set; } = 50;
+    private bool _paused = false;
 
     public override List<Resource> Resources => new List<Resource>()
     {
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
+        new Resource { ResourceType = ResourceType.Stylesheet,  Url = "_content/MudBlazor/MudBlazor.min.css" },
         new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
+        new Resource { ResourceType = ResourceType.Script,      Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
         new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
     };
+
 
     protected override Task OnInitializedAsync()
     {
@@ -36,6 +43,21 @@
 
         return Task.CompletedTask;
     }
+
+    public async Task OnToggledChanged(bool toggled)
+    {
+        // Because variable is not two-way bound, we need to update it ourselves.
+        _paused = toggled;
+
+        if (_paused)
+        {
+            await PlayAudio();
+        }
+        else {
+            await PauseAudio();
+        }
+    }
+
 
     private void OnMusicPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
