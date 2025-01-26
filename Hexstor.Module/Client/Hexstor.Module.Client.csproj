@@ -11,11 +11,20 @@
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Modules\Hexstor.Module.GIF\ModuleInfo.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\ink\compiler\ink_compiler.csproj" />
 		<ProjectReference Include="..\..\ink\ink-engine-runtime\ink-engine-runtime.csproj" />
+		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Client\Oqtane.Client.csproj" />
 		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Server\Oqtane.Server.csproj" />
+		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Shared\Oqtane.Shared.csproj" />
 		<ProjectReference Include="..\Shared\Hexstor.Module.Shared.csproj" />
 	</ItemGroup>
 
@@ -25,14 +34,5 @@
 		<PackageReference Include="MudBlazor" Version="7.14.0" />
 		<PackageReference Include="System.Net.Http.Json" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Reference Include="Oqtane.Client">
-			<HintPath>..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\Oqtane.Client.dll</HintPath>
-		</Reference>
-		<Reference Include="Oqtane.Shared">
-			<HintPath>..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\Oqtane.Shared.dll</HintPath>
-		</Reference>
 	</ItemGroup>
 </Project>

@@ -96,6 +96,18 @@ else
 
     }
 
+    private async Task ChangeGif()
+    {
+        // Look for a GIF tag on the current story section
+        var tag = _story.currentTags.FirstOrDefault(t => t.Contains("gif:", StringComparison.InvariantCultureIgnoreCase));
+        if (tag != null)
+        {
+            // Update the sitestate with the new GIF URL
+            var url = $"gifs/{tag.Substring(4)}.gif"; // remove the gif: prefix
+            SiteState.Properties.Gif = url;  // This will be used by the GIF module
+        }
+    }
+
     private async Task ChangeMusic()
     {
         // look for a lottie tag on the current story section
