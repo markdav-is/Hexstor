@@ -36,5 +36,6 @@ namespace Hexstor.Module.Client.ViewModels
         public int PlayerId { get; set; }
         public CommandType Type { get; set; }
         public MapCorner StartCorner{ get; set; } = MapCorner.NW;
+        public ShipStyle ShipStyle { get; set; } = ShipStyle.Red;
     }
 }

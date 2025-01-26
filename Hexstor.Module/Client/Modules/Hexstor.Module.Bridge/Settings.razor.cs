@@ -7,6 +7,7 @@ using Oqtane.Modules;
 using Oqtane.Services;
 using Oqtane.Models;
 using Oqtane.Shared;
+using Hexstor.Module.Client.ViewModels;
 
 
 namespace Hexstor.Module.Bridge
@@ -20,13 +21,16 @@ namespace Hexstor.Module.Bridge
         public override string Title => "Template Settings";
         private SettingsViewModel _settingsVM;
         private bool _loading = true;
-        private string _value;
+        private string _shipStyle;
+        private string _shipCorner;
+        private string _shipLevel;
+
         public override List<Resource> Resources => new List<Resource>()
             {
                 new Resource { ResourceType = ResourceType.Stylesheet,  Url = "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" },
                 new Resource { ResourceType = ResourceType.Stylesheet,  Url = "_content/MudBlazor/MudBlazor.min.css" },
                 new Resource { ResourceType = ResourceType.Stylesheet,  Url = ModulePath() + "Module.css" },
-                new Resource { ResourceType = ResourceType.Script,     Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
+                new Resource { ResourceType = ResourceType.Script,      Url = "_content/MudBlazor/MudBlazor.min.js", Location = ResourceLocation.Body, Level = ResourceLevel.Site },
                 new Resource { ResourceType = ResourceType.Script,      Url = ModulePath() + "Module.js" },
             };
         protected override async Task OnInitializedAsync()
@@ -35,6 +39,9 @@ namespace Hexstor.Module.Bridge
             {
                 var moduleSettings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
                 _settingsVM = new SettingsViewModel(SettingService, moduleSettings);
+                _shipStyle = _settingsVM.ShipStyle.ToString();
+                _shipCorner = _settingsVM.StartCorner.ToString();
+                _shipLevel = _settingsVM.ShipLevel.ToString();
                 _loading = false;
             }
             catch (Exception ex)
@@ -46,7 +53,11 @@ namespace Hexstor.Module.Bridge
         public async Task UpdateSettings()
         {
             try
-            {
+            {                
+                _settingsVM.ShipStyle = Enum.TryParse(_shipStyle, out ShipStyle style) ? style : ShipStyle.Red;
+                _settingsVM.StartCorner = Enum.TryParse(_shipCorner, out MapCorner corner) ? corner : MapCorner.NW;
+                _settingsVM.ShipLevel = Int32.TryParse(_shipLevel, out int level) ? level : 1;
+
                 Dictionary<string, string> settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
                 _settingsVM.SetSettings(SettingService, settings);
                 await SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
