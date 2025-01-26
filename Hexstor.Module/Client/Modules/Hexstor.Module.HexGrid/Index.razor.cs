@@ -129,8 +129,9 @@ public partial class Index : ModuleBase
         {
             hex.Ship = null;
         }
-        int ne = (_settingsVM.Columns - 1) * (_settingsVM.Rows - 1);
-        int sw = (_settingsVM.Rows - 1);
+        // this math is wrong but it works for now
+        int ne = (_settingsVM.Columns*_settingsVM.Rows)-(_settingsVM.Rows - 1);
+        int sw = (_settingsVM.Rows);
         switch (command.StartCorner)
         {
             case MapCorner.NW:
