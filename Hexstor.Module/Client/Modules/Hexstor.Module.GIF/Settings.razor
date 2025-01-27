@@ -1,0 +1,47 @@
+﻿@namespace Hexstor.Module.GIF
+@inherits ModuleBase
+@inject ISettingService SettingService
+@inject IStringLocalizer<Settings> Localizer
+
+<div class="container">
+    <div class="row mb-1 align-items-center">
+        <label class="col-sm-3" for="value">GIF URL: </label>
+        <div class="col-sm-9">
+            <input id="value" type="text" class="form-control" @bind="_value" />
+        </div>
+    </div>
+</div>
+
+@code {
+    private string resourceType = "Hexstor.Module.GIF.Settings, Hexstor.Module.GIF.Client.Oqtane";
+    public override string Title => "GIF Settings";
+
+    private string _value;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Dictionary<string, string> settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+            _value = SettingService.GetSetting(settings, "GIF", "");
+        }
+        catch (Exception ex)
+        {
+            AddModuleMessage(ex.Message, MessageType.Error);
+        }
+    }
+
+    public async Task UpdateSettings()
+    {
+        try
+        {
+            Dictionary<string, string> settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+            SettingService.SetSetting(settings, "GIF", _value);
+            await SettingService.UpdateModuleSettingsAsync(settings, ModuleState.ModuleId);
+        }
+        catch (Exception ex)
+        {
+            AddModuleMessage(ex.Message, MessageType.Error);
+        }
+    }
+}

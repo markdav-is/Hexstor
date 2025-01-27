@@ -1,0 +1,53 @@
+﻿@namespace Hexstor.Module.GIF
+@using System.ComponentModel
+@inherits ModuleBase
+@inject ISettingService SettingService
+@implements IDisposable
+
+@if (PageState.EditMode)
+{
+    <h2>@ModuleState.Title</h2>
+}
+else if (_gifUrl == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center">
+                    <img src="@_gifUrl" alt="GIF Animation" class="img-fluid" style="height:333px" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@code {
+    private string _gifUrl;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load the GIF URL from settings
+        var settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
+        _gifUrl = SettingService.GetSetting(settings, "GIF", "images/gifs/BG_03.gif");
+
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged += HandlePropertyChanged;
+    }
+
+    private void HandlePropertyChanged(object sender, PropertyChangedEventArgs args)
+    {
+        if (args.PropertyName == "GIF")
+        {
+            _gifUrl = SiteState.Properties.GIF;
+            StateHasChanged();
+        }
+    }
+
+    public void Dispose()
+    {
+        ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged -= HandlePropertyChanged;
+    }
+}

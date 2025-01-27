@@ -11,11 +11,47 @@
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs" />
+		<Compile Include="Interop.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\SettingsViewModel.cs" />
+		<Compile Include="Modules\Hexstor.Module.GIF\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Components\HexTile.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Components\ShipCounter.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\SettingsViewModel.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Spritesheet.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Lottie\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.MusicPlayer\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Edit.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\SettingsViewModel.cs" />
+		<Compile Include="Services\ResponseServiceBase.cs" />
+		<Compile Include="Services\Startup.cs" />
+		<Compile Include="Services\TemplateService.cs" />
+		<Compile Include="ViewModels\Command.cs" />
+		<Compile Include="ViewModels\DoubCoord.cs" />
+		<Compile Include="ViewModels\Hex.cs" />
+		<Compile Include="ViewModels\Ship.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\ink\compiler\ink_compiler.csproj" />
 		<ProjectReference Include="..\..\ink\ink-engine-runtime\ink-engine-runtime.csproj" />
+		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Client\Oqtane.Client.csproj" />
 		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Server\Oqtane.Server.csproj" />
+		<ProjectReference Include="..\..\oqtane.framework\Oqtane.Shared\Oqtane.Shared.csproj" />
 		<ProjectReference Include="..\Shared\Hexstor.Module.Shared.csproj" />
 	</ItemGroup>
 
@@ -28,11 +64,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="Oqtane.Client">
-			<HintPath>..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\Oqtane.Client.dll</HintPath>
-		</Reference>
-		<Reference Include="Oqtane.Shared">
-			<HintPath>..\..\oqtane.framework\Oqtane.Server\bin\Debug\net9.0\Oqtane.Shared.dll</HintPath>
-		</Reference>
+	  <Folder Include="NewFolder\" />
 	</ItemGroup>
 </Project>

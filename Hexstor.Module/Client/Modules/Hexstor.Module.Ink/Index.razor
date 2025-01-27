@@ -80,6 +80,7 @@ else
         StateHasChanged();
         await ChangeLottie();
         await ChangeMusic();
+        await ChangeGIF();
 
     }
 
@@ -94,6 +95,30 @@ else
             SiteState.Properties.Lottie = url;  // this will be used by the Lottie module
         }
 
+    }
+    private async Task ChangeGIF()
+    {
+        // look for a lottie tag on the current story section
+        var tag = _story.currentTags.FirstOrDefault(t => t.Contains("gif:", StringComparison.InvariantCultureIgnoreCase));
+        if (tag != null)
+        {
+            // update the sitestate with the new lottie url
+            var url = $"/images/gifs/{tag.Substring(4)}.gif"; // remove the gif: prefix and add https://
+            SiteState.Properties.GIF = url;  // this will be used by the Lottie module
+        }
+
+    }
+
+    private async Task ChangeGif()
+    {
+        // Look for a GIF tag on the current story section
+        var tag = _story.currentTags.FirstOrDefault(t => t.Contains("gif:", StringComparison.InvariantCultureIgnoreCase));
+        if (tag != null)
+        {
+            // Update the sitestate with the new GIF URL
+            var url = $"gifs/{tag.Substring(4)}.gif"; // remove the gif: prefix
+            SiteState.Properties.Gif = url;  // This will be used by the GIF module
+        }
     }
 
     private async Task ChangeMusic()
