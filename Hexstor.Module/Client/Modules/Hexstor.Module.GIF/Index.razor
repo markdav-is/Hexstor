@@ -18,7 +18,7 @@ else
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="text-center">
-                    <img src="@_gifUrl" alt="GIF Animation" class="img-fluid" />
+                    <img src="@_gifUrl" alt="GIF Animation" class="img-fluid" style="height:333px" />
                 </div>
             </div>
         </div>
@@ -41,8 +41,7 @@ else
     {
         if (args.PropertyName == "GIF")
         {
-            string name = SiteState.Properties.gif;
-            _gifUrl = "images/gifs/{name}.gif";
+            _gifUrl = SiteState.Properties.GIF;
             StateHasChanged();
         }
     }
