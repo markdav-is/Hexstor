@@ -16,7 +16,34 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs" />
+		<Compile Include="Interop.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Bridge\SettingsViewModel.cs" />
 		<Compile Include="Modules\Hexstor.Module.GIF\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Components\HexTile.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Components\ShipCounter.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\SettingsViewModel.cs" />
+		<Compile Include="Modules\Hexstor.Module.HexGrid\Spritesheet.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Lottie\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.MusicPlayer\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Edit.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Index.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\ModuleInfo.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\Settings.razor.cs" />
+		<Compile Include="Modules\Hexstor.Module.Template\SettingsViewModel.cs" />
+		<Compile Include="Services\ResponseServiceBase.cs" />
+		<Compile Include="Services\Startup.cs" />
+		<Compile Include="Services\TemplateService.cs" />
+		<Compile Include="ViewModels\Command.cs" />
+		<Compile Include="ViewModels\DoubCoord.cs" />
+		<Compile Include="ViewModels\Hex.cs" />
+		<Compile Include="ViewModels\Ship.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,5 +61,9 @@
 		<PackageReference Include="MudBlazor" Version="7.14.0" />
 		<PackageReference Include="System.Net.Http.Json" Version="9.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="NewFolder\" />
 	</ItemGroup>
 </Project>

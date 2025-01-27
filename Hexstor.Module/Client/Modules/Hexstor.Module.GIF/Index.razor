@@ -24,11 +24,6 @@ else
         </div>
     </div>
 
-    <script>
-        window.updateGIF = function(url) {
-            document.querySelector('img').src = url;
-        }
-    </script>
 }
 @code {
     private string _gifUrl;
@@ -46,8 +41,9 @@ else
     {
         if (args.PropertyName == "GIF")
         {
-            string url = SiteState.Properties["GIF"];
-            JSRuntime.InvokeVoidAsync("updateGIF", url).GetAwaiter();
+            string name = SiteState.Properties.gif;
+            _gifUrl = "images/gifs/{name}.gif";
+            StateHasChanged();
         }
     }
 
