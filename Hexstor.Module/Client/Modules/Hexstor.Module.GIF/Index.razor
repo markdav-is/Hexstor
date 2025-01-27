@@ -32,7 +32,7 @@ else
     {
         // Load the GIF URL from settings
         var settings = await SettingService.GetModuleSettingsAsync(ModuleState.ModuleId);
-        _gifUrl = SettingService.GetSetting(settings, "GIF", "default.gif");
+        _gifUrl = SettingService.GetSetting(settings, "GIF", "images/gifs/BG_03.gif");
 
         ((INotifyPropertyChanged)SiteState.Properties).PropertyChanged += HandlePropertyChanged;
     }
