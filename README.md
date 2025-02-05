@@ -1,3 +1,6 @@
+# This repo is frozen for the Global Game Jam 2025
+Check out the new fork here: https://github.com/CodeChopsOrg/StarHex
+
 # Hexstor
 Hexstor the hex-based combat and interactive fiction space game.
 Prostor is the Russian word for "space" or "expance"
